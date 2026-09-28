@@ -1,6 +1,7 @@
 import { obtenerCategorias } from "../services/categoryService.js";
 import { obtenerProductos } from "../services/productService.js";
 import { ProductGrid } from "../components/ProductGrid.js";
+import { escapeHTML } from "../utils/escapeHTML.js";
 
 export async function ProductsView() {
     const categorias = await obtenerCategorias();
@@ -14,15 +15,15 @@ export async function ProductsView() {
             <div class="d-flex justify-content-center gap-2 flex-wrap mb-4" id="contenedorFiltros">
                 <button class="btn btn-success btn-filtro active" data-categoria="todas">Todos</button>
                 ${categorias.map(cat => `
-                    <button class="btn btn-outline-success btn-filtro" data-categoria="${cat.nombre}">
-                        ${cat.nombre}
+                    <button class="btn btn-outline-success btn-filtro" data-categoria="${escapeHTML(cat.nombre)}">
+                        ${escapeHTML(cat.nombre)}
                     </button>
                 `).join('')}
             </div>
 
             <!-- Grilla de Productos -->
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="contenedorProductos">
-                ${ProductGrid(productos, "../")}
+                ${ProductGrid(productos, "./")}
             </div>
         </div>
     `;
@@ -44,10 +45,10 @@ export async function ProductsView() {
 
                 const cat = e.target.dataset.categoria;
                 if (cat === "todas") {
-                    contenedorProductos.innerHTML = ProductGrid(productos, "../");
+                    contenedorProductos.innerHTML = ProductGrid(productos, "./");
                 } else {
                     const filtrados = productos.filter(p => p.categoria === cat);
-                    contenedorProductos.innerHTML = ProductGrid(filtrados, "../");
+                    contenedorProductos.innerHTML = ProductGrid(filtrados, "./");
                 }
             });
         }

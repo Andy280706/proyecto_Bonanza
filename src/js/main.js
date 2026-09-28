@@ -8,12 +8,8 @@ async function renderApp() {
     const app = document.getElementById("app");
     if (!app) return;
 
-    // Detectar en qué página estamos según la URL
     const path = window.location.pathname;
-    const esSubpagina = path.includes("/pages/");
-    const rutaBase = esSubpagina ? "../" : "./";
 
-    // 1. Obtener el contenido de la vista actual
     let viewHTML = "";
 
     if (path.includes("productos.html")) {
@@ -25,7 +21,6 @@ async function renderApp() {
         viewHTML = await HomeView();
     }
 
-    // 2. Renderizar Header + Vista + Footer en la pantalla
     app.innerHTML = `
     ${Header()}
     <main>${viewHTML}</main>
@@ -33,5 +28,4 @@ async function renderApp() {
 `;
 }
 
-// Ejecutar cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", renderApp);

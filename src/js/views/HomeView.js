@@ -25,7 +25,7 @@ export async function HomeView() {
                     <a href="./src/pages/productos.html" class="text-success text-decoration-none fw-bold">Ver todos →</a>
                 </div>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                    ${ProductGrid(destacados, "./src/")}
+                    ${ProductGrid(destacados, "./src/pages/")}
                 </div>
             </section>
 

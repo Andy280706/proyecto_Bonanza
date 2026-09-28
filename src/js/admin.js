@@ -1,6 +1,7 @@
 import { obtenerCategorias, crearCategoria, eliminarCategoria } from "./services/categoryService.js";
 import { obtenerProductos, crearProducto, eliminarProducto } from "./services/productService.js";
 import { obtenerContactos, eliminarContacto } from "./services/contactService.js";
+import { escapeHTML } from "./utils/escapeHTML.js";
 
 /* ==========================================================================
    ELEMENTOS DEL DOM
@@ -68,17 +69,17 @@ async function renderCategorias() {
         ? `<tr><td colspan="3" class="text-center text-muted py-3">No hay categorías registradas.</td></tr>`
         : categorias.map(c => `
             <tr>
-                <td class="fw-bold">${c.nombre}</td>
-                <td>${c.descripcion || '-'}</td>
+                <td class="fw-bold">${escapeHTML(c.nombre)}</td>
+                <td>${escapeHTML(c.descripcion || '-')}</td>
                 <td class="text-center">
-                    <button data-id="${c.id}" class="btn btn-sm btn-danger del-cat">Eliminar</button>
+                    <button data-id="${escapeHTML(c.id)}" class="btn btn-sm btn-danger del-cat">Eliminar</button>
                 </td>
             </tr>
         `).join('');
 
     if (selectCat) {
         selectCat.innerHTML = '<option value="">Seleccione categoría...</option>' + 
-            categorias.map(c => `<option value="${c.nombre}">${c.nombre}</option>`).join('');
+            categorias.map(c => `<option value="${escapeHTML(c.nombre)}">${escapeHTML(c.nombre)}</option>`).join('');
     }
 }
 
@@ -116,12 +117,12 @@ async function renderProductos() {
         ? `<tr><td colspan="5" class="text-center text-muted py-3">No hay productos registrados.</td></tr>`
         : productos.map(p => `
             <tr>
-                <td><img src="${p.imagen || 'https://via.placeholder.com/40'}" width="40" height="40" class="rounded object-fit-cover"></td>
-                <td class="fw-bold">${p.nombre}</td>
-                <td><span class="badge bg-secondary">${p.categoria}</span></td>
+                <td><img src="${escapeHTML(p.imagen || 'https://via.placeholder.com/40')}" width="40" height="40" class="rounded object-fit-cover"></td>
+                <td class="fw-bold">${escapeHTML(p.nombre)}</td>
+                <td><span class="badge bg-secondary">${escapeHTML(p.categoria)}</span></td>
                 <td class="text-success fw-bold">S/ ${parseFloat(p.precio).toFixed(2)}</td>
                 <td class="text-center">
-                    <button data-id="${p.id}" class="btn btn-sm btn-danger del-prod">Eliminar</button>
+                    <button data-id="${escapeHTML(p.id)}" class="btn btn-sm btn-danger del-prod">Eliminar</button>
                 </td>
             </tr>
         `).join('');
@@ -163,12 +164,12 @@ async function renderContactos() {
         ? `<tr><td colspan="5" class="text-center text-muted py-3">No hay mensajes registrados.</td></tr>`
         : contactos.map(m => `
             <tr>
-                <td class="small text-muted">${m.fecha || '-'}</td>
-                <td class="fw-bold">${m.nombre}</td>
-                <td>${m.correo}</td>
-                <td>${m.mensaje}</td>
+                <td class="small text-muted">${escapeHTML(m.fecha || '-')}</td>
+                <td class="fw-bold">${escapeHTML(m.nombre)}</td>
+                <td>${escapeHTML(m.correo)}</td>
+                <td>${escapeHTML(m.mensaje)}</td>
                 <td class="text-center">
-                    <button data-id="${m.id}" class="btn btn-sm btn-outline-danger del-msg">Eliminar</button>
+                    <button data-id="${escapeHTML(m.id)}" class="btn btn-sm btn-outline-danger del-msg">Eliminar</button>
                 </td>
             </tr>
         `).join('');

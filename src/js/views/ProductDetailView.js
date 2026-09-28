@@ -1,5 +1,6 @@
 import { obtenerProductoPorId } from "../services/productService.js";
 import { formatCurrency } from "../utils/formatCurrency.js";
+import { escapeHTML } from "../utils/escapeHTML.js";
 
 export async function ProductDetailView() {
     // Obtener ID desde la URL (?id=XYZ)
@@ -32,13 +33,13 @@ export async function ProductDetailView() {
             <div class="card shadow border-0 overflow-hidden">
                 <div class="row g-0">
                     <div class="col-md-6">
-                        <img src="${producto.imagen || 'https://via.placeholder.com/500'}" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 300px;" alt="${producto.nombre}">
+                        <img src="${escapeHTML(producto.imagen || 'https://via.placeholder.com/500')}" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 300px;" alt="${escapeHTML(producto.nombre)}">
                     </div>
                     <div class="col-md-6 p-4 p-md-5 d-flex flex-column justify-content-center">
-                        <span class="badge bg-success align-self-start mb-2">${producto.categoria}</span>
-                        <h2 class="fw-bold text-dark">${producto.nombre}</h2>
+                        <span class="badge bg-success align-self-start mb-2">${escapeHTML(producto.categoria)}</span>
+                        <h2 class="fw-bold text-dark">${escapeHTML(producto.nombre)}</h2>
                         <h3 class="text-success fw-bold my-3">${formatCurrency(producto.precio)}</h3>
-                        <p class="text-muted mb-4">${producto.descripcion || 'Producto lácteo de alta calidad, elaborado con estándares artesanales para garantizar máxima frescura.'}</p>
+                        <p class="text-muted mb-4">${escapeHTML(producto.descripcion || 'Producto lácteo de alta calidad, elaborado con estándares artesanales para garantizar máxima frescura.')}</p>
                         <button onclick="alert('Solicitud enviada a la tienda')" class="btn btn-success btn-lg fw-bold">Pedir por WhatsApp 📱</button>
                     </div>
                 </div>
