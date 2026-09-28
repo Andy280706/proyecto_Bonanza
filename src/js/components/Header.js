@@ -1,36 +1,19 @@
-export default {
-    template: `
-        <header class="header">
-            <div class="container header__content">
-                <a
-                    href="/index.html"
-                    class="header__logo"
-                >
-                    Mi E-commerce
-                </a>
-                <nav class="header__nav">
-                    <a href="/index.html">
-                        Inicio
-                    </a>
-                    <a href="/pages/productos.html">
-                        Productos
-                    </a>
-                    <a href="#">
-                        Categorías
-                    </a>
-                </nav>
-                <div class="header__actions">
-                    <a
-                        href="#"
-                        class="header__cart"
-                    >
-                        🛒
-                        <span>
-                            Carrito
-                        </span>
-                    </a>
+export function Header() {
+    const enPages = window.location.pathname.includes("/src/pages/");
+    const base = enPages ? "../../" : "./";
+    const pagesBase = enPages ? "./" : "./src/pages/";
+
+    return `
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-4" href="${base}index.html">🥛 Lácteos Bonanza</a>
+                <div class="collapse navbar-collapse show" id="navMenu">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item"><a class="nav-link fw-bold" href="${base}index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link fw-bold" href="${pagesBase}productos.html">Catálogo</a></li>
+                    </ul>
                 </div>
             </div>
-        </header>
-    `
-};
+        </nav>
+    `;
+}

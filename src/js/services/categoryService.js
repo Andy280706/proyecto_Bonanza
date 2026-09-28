@@ -1,27 +1,7 @@
-import {
-    collection,
-    getDocs,
-    query,
-    where
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getItems, createItem, updateItem, deleteItem } from "./crudService.js";
+import { COLECCIONES } from "../utils/constants.js";
 
-import { db } from "../firebase/config.js";
-
-const COLLECTION_NAME = "categorias";
-export async function getCategories() {
-    const reference =
-        collection(db, COLLECTION_NAME);
-
-    const q = query(
-        reference,
-        where("activo", "==", true)
-    );
-
-    const snapshot =
-        await getDocs(q);
-
-    return snapshot.docs.map(document => ({
-        id: document.id,
-        ...document.data()
-    }));
-}
+export const obtenerCategorias = () => getItems(COLECCIONES.CATEGORIAS);
+export const crearCategoria = (data) => createItem(COLECCIONES.CATEGORIAS, data);
+export const actualizarCategoria = (id, data) => updateItem(COLECCIONES.CATEGORIAS, id, data);
+export const eliminarCategoria = (id) => deleteItem(COLECCIONES.CATEGORIAS, id);

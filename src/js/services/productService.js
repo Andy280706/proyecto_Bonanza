@@ -1,52 +1,8 @@
-import {
-    collection,
-    getDocs,
-    getDoc,
-    doc,
-    query,
-    where,
-    orderBy
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getItems, getItemById, createItem, updateItem, deleteItem } from "./crudService.js";
+import { COLECCIONES } from "../utils/constants.js";
 
-import { db } from "../firebase/config.js";
-
-const COLLECTION_NAME = "productos";
-
-export async function getProducts() {
-    const reference =
-        collection(db, COLLECTION_NAME);
-    const q = query(
-        reference,
-        where("activo", "==", true)
-    );
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map(document => ({
-        id: document.id,
-        ...document.data()
-    }));
-}
-
-export async function getAllProducts() {
-    const reference =
-        collection(db, COLLECTION_NAME);
-    const snapshot =
-        await getDocs(reference);
-    return snapshot.docs.map(document => ({
-        id: document.id,
-        ...document.data()
-    }));
-}
-
-export async function getProductById(id) {
-    const reference =
-        doc(db, COLLECTION_NAME, id);
-    const snapshot =
-        await getDoc(reference);
-    if (!snapshot.exists()) {
-        return null;
-    }
-    return {
-        id: snapshot.id,
-        ...snapshot.data()
-    };
-}
+export const obtenerProductos = () => getItems(COLECCIONES.PRODUCTOS);
+export const obtenerProductoPorId = (id) => getItemById(COLECCIONES.PRODUCTOS, id);
+export const crearProducto = (data) => createItem(COLECCIONES.PRODUCTOS, data);
+export const actualizarProducto = (id, data) => updateItem(COLECCIONES.PRODUCTOS, id, data);
+export const eliminarProducto = (id) => deleteItem(COLECCIONES.PRODUCTOS, id);

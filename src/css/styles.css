@@ -1,0 +1,92 @@
+/* ==========================================================================
+   LÁCTEOS BONANZA S.A. - HOJA DE ESTILOS UNIFICADA
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap');
+
+/* Variables Oficiales de Marca */
+:root {
+    --amarillo-bonanza: #FFB300;   /* Primario: Navbars, encabezados */
+    --verde-frescura: #00A896;     /* Secundario: Títulos, precios */
+    --naranja-vibrante: #E65100;   /* Acento: Botones principales */
+    --blanco-neutro: #FFFFFF;      /* Tarjetas y contenedores */
+    --gris-oscuro: #212529;         /* Textos y Footer */
+    --fondo-pagina: #FDFBF7;       /* Fondo crema lácteo */
+}
+
+/* Reset y Layout para Sticky Footer */
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: var(--fondo-pagina);
+    color: var(--gris-oscuro);
+    font-family: 'Nunito', sans-serif;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    margin-top: auto !important;
+    background-color: var(--gris-oscuro) !important;
+    color: var(--blanco-neutro);
+}
+
+/* Tipografías de Títulos */
+h1, h2, h3, h4, h5, h6, 
+.navbar-brand, 
+.card-title {
+    font-family: 'Fredoka', cursive, sans-serif;
+}
+
+/* Componentes Sobrescritos */
+.navbar {
+    background-color: var(--amarillo-bonanza) !important;
+}
+
+.navbar-brand, .nav-link {
+    color: var(--gris-oscuro) !important;
+}
+
+.text-success {
+    color: var(--verde-frescura) !important;
+}
+
+.btn-success {
+    background-color: var(--naranja-vibrante) !important;
+    border-color: var(--naranja-vibrante) !important;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.btn-success:hover {
+    background-color: #BF360C !important;
+    border-color: #BF360C !important;
+}
+
+.btn-outline-success {
+    color: var(--verde-frescura) !important;
+    border-color: var(--verde-frescura) !important;
+}
+
+.btn-outline-success:hover, 
+.btn-outline-success.active {
+    background-color: var(--verde-frescura) !important;
+    color: var(--blanco-neutro) !important;
+}
+
+.card {
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}

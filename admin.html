@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración | Lácteos Bonanza</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./src/css/styles.css">
+</head>
+<body class="bg-light">
+
+    <!-- Barra Superior -->
+    <nav class="navbar navbar-dark bg-dark mb-4 shadow">
+        <div class="container">
+            <span class="navbar-brand fw-bold">🥛 Lácteos Bonanza - Panel Admin</span>
+            <a href="index.html" class="btn btn-outline-light btn-sm">Ir a la Tienda 🛒</a>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <!-- Pestañas de Navegación -->
+        <ul class="nav nav-tabs fw-bold mb-4" id="adminTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="cat-tab" data-bs-toggle="tab" data-bs-target="#cat-panel" type="button" role="tab">
+                    📁 Tipos de Lácteos (Categorías)
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="prod-tab" data-bs-toggle="tab" data-bs-target="#prod-panel" type="button" role="tab">
+                    🧀 Catálogo de Productos
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="msg-tab" data-bs-toggle="tab" data-bs-target="#msg-panel" type="button" role="tab">
+                    📩 Mensajes de Clientes
+                </button>
+            </li>
+        </ul>
+
+        <!-- Contenido de Pestañas -->
+        <div class="tab-content" id="adminTabsContent">
+            
+            <!-- TAB 1: CATEGORÍAS -->
+            <div class="tab-pane fade show active" id="cat-panel" role="tabpanel">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <form id="formCategoria" class="card card-body shadow-sm border-0">
+                            <h5 class="card-title mb-3">Nueva Categoría</h5>
+                            <input type="hidden" id="catId">
+                            <div class="mb-3">
+                                <label for="catNombre" class="form-label fw-bold">Nombre</label>
+                                <input type="text" id="catNombre" class="form-control" placeholder="Ej: Quesos, Leches" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="catDescripcion" class="form-label fw-bold">Descripción</label>
+                                <input type="text" id="catDescripcion" class="form-control" placeholder="Ej: Quesos artesanales">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Guardar Categoría</button>
+                        </form>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-0">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Descripción</th>
+                                            <th class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaCategorias"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: PRODUCTOS -->
+            <div class="tab-pane fade" id="prod-panel" role="tabpanel">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <form id="formProducto" class="card card-body shadow-sm border-0">
+                            <h5 class="card-title mb-3">Nuevo Producto Lácteo</h5>
+                            <input type="hidden" id="prodId">
+                            <div class="mb-3">
+                                <label for="prodNombre" class="form-label fw-bold">Nombre</label>
+                                <input type="text" id="prodNombre" class="form-control" placeholder="Ej: Queso Paria 500g" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="prodPrecio" class="form-label fw-bold">Precio (S/)</label>
+                                <input type="number" step="0.01" id="prodPrecio" class="form-control" placeholder="Ej: 18.00" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="prodCategoria" class="form-label fw-bold">Categoría</label>
+                                <select id="prodCategoria" class="form-select" required>
+                                    <option value="">Seleccione categoría...</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="prodImagen" class="form-label fw-bold">URL Imagen</label>
+                                <input type="url" id="prodImagen" class="form-control" placeholder="https://...">
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Guardar Producto</button>
+                        </form>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-0">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Imagen</th>
+                                            <th>Producto</th>
+                                            <th>Categoría</th>
+                                            <th>Precio</th>
+                                            <th class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaProductos"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: MENSAJES DE CLIENTES -->
+            <div class="tab-pane fade" id="msg-panel" role="tabpanel">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-0">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Correo</th>
+                                    <th>Mensaje</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaContactos"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JS de Bootstrap para activar los clics de las pestañas -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/bootstrap.bundle.min.js"></script>
+    <!-- Controlador JS del Administrador -->
+    <script type="module" src="./src/js/admin.js"></script>
+</body>
+</html>

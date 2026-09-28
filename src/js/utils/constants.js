@@ -3,3 +3,8 @@ export const APP_CONFIG = {
     currency: "PEN",
     country: "PE"
 };
+export const COLECCIONES = {
+    CATEGORIAS: "categorias",
+    PRODUCTOS: "productos",
+    CONTACTOS: "contactos"
+};

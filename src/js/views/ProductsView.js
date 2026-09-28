@@ -1,214 +1,57 @@
-import Header
-    from "../components/Header.js";
-
-import Footer
-    from "../components/Footer.js";
-
-import ProductGrid
-    from "../components/ProductGrid.js";
-
-import Loading
-    from "../components/Loading.js";
-
-import {
-    getProducts
-} from "../services/productService.js";
-
-
-export default {
-
-    components: {
-
-        Header,
-
-        Footer,
-
-        ProductGrid,
-
-        Loading
-
-    },
-
-
-    data() {
-
-        return {
-
-            products: [],
-
-            filteredProducts: [],
-
-            search: "",
-
-            loading: true,
-
-            error: null
-
-        };
-
-    },
-
-
-    async mounted() {
-
-        try {
-
-            this.products =
-                await getProducts();
-
-            this.filteredProducts =
-                this.products;
-
-        } catch (error) {
-
-            console.error(error);
-
-            this.error =
-                "No se pudieron cargar los productos.";
-
-        } finally {
-
-            this.loading = false;
-
-        }
-
-    },
-
-
-    methods: {
-
-        filterProducts() {
-
-            const term =
-                this.search
-                    .trim()
-                    .toLowerCase();
-
-
-            if (!term) {
-
-                this.filteredProducts =
-                    this.products;
-
-                return;
-
-            }
-
-
-            this.filteredProducts =
-                this.products.filter(product => {
-
-                    const name =
-                        product.nombre
-                            ?.toLowerCase() || "";
-
-                    const brand =
-                        product.marca
-                            ?.toLowerCase() || "";
-
-                    return (
-                        name.includes(term) ||
-                        brand.includes(term)
-                    );
-
-                });
-
-        }
-
-    },
-
-
-    template: `
-
-        <div>
-
-            <Header />
-
-
-            <main class="products-page">
-
-                <div class="container">
-
-
-                    <div class="products-page__header">
-
-                        <span>
-                            CATÁLOGO
-                        </span>
-
-                        <h1>
-                            Todos nuestros productos
-                        </h1>
-
-                        <p>
-                            Explora nuestro catálogo.
-                        </p>
-
-                    </div>
-
-
-                    <div class="products-toolbar">
-
-                        <input
-                            v-model="search"
-                            @input="filterProducts"
-                            type="search"
-                            placeholder="Buscar producto..."
-                            class="products-search"
-                        />
-
-
-                        <span>
-
-                            {{ filteredProducts.length }}
-                            productos
-
-                        </span>
-
-                    </div>
-
-
-                    <Loading
-                        v-if="loading"
-                        message="Cargando catálogo..."
-                    />
-
-
-                    <div
-                        v-else-if="error"
-                        class="error-message"
-                    >
-
-                        {{ error }}
-
-                    </div>
-
-
-                    <div
-                        v-else-if="filteredProducts.length === 0"
-                        class="empty-message"
-                    >
-
-                        No encontramos productos.
-
-                    </div>
-
-
-                    <ProductGrid
-                        v-else
-                        :products="filteredProducts"
-                    />
-
-
-                </div>
-
-            </main>
-
-
-            <Footer />
-
+import { obtenerCategorias } from "../services/categoryService.js";
+import { obtenerProductos } from "../services/productService.js";
+import { ProductGrid } from "../components/ProductGrid.js";
+
+export async function ProductsView() {
+    const categorias = await obtenerCategorias();
+    const productos = await obtenerProductos();
+
+    const html = `
+        <div class="container my-5">
+            <h2 class="fw-bold text-success text-center mb-4">Catálogo de Productos Lácteos</h2>
+            
+            <!-- Filtros de Categorías -->
+            <div class="d-flex justify-content-center gap-2 flex-wrap mb-4" id="contenedorFiltros">
+                <button class="btn btn-success btn-filtro active" data-categoria="todas">Todos</button>
+                ${categorias.map(cat => `
+                    <button class="btn btn-outline-success btn-filtro" data-categoria="${cat.nombre}">
+                        ${cat.nombre}
+                    </button>
+                `).join('')}
+            </div>
+
+            <!-- Grilla de Productos -->
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="contenedorProductos">
+                ${ProductGrid(productos, "../")}
+            </div>
         </div>
+    `;
 
-    `
+    // Eventos de Filtrado
+    setTimeout(() => {
+        const contenedorFiltros = document.getElementById("contenedorFiltros");
+        const contenedorProductos = document.getElementById("contenedorProductos");
 
-};
+        if (contenedorFiltros) {
+            contenedorFiltros.addEventListener("click", (e) => {
+                if (!e.target.classList.contains("btn-filtro")) return;
+
+                document.querySelectorAll(".btn-filtro").forEach(b => {
+                    b.classList.remove("active", "btn-success");
+                    b.classList.add("btn-outline-success");
+                });
+                e.target.classList.add("active", "btn-success");
+
+                const cat = e.target.dataset.categoria;
+                if (cat === "todas") {
+                    contenedorProductos.innerHTML = ProductGrid(productos, "../");
+                } else {
+                    const filtrados = productos.filter(p => p.categoria === cat);
+                    contenedorProductos.innerHTML = ProductGrid(filtrados, "../");
+                }
+            });
+        }
+    }, 0);
+
+    return html;
+}

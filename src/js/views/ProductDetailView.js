@@ -1,247 +1,48 @@
-import Header
-    from "../components/Header.js";
+import { obtenerProductoPorId } from "../services/productService.js";
+import { formatCurrency } from "../utils/formatCurrency.js";
 
-import Footer
-    from "../components/Footer.js";
+export async function ProductDetailView() {
+    // Obtener ID desde la URL (?id=XYZ)
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id");
 
-import Loading
-    from "../components/Loading.js";
+    if (!id) {
+        return `
+            <div class="container my-5 text-center py-5">
+                <h4>Producto no encontrado.</h4>
+                <a href="productos.html" class="btn btn-success mt-3">Volver al catálogo</a>
+            </div>
+        `;
+    }
 
-import {
-    getProductById
-} from "../services/productService.js";
+    const producto = await obtenerProductoPorId(id);
 
-import {
-    formatCurrency
-} from "../utils/formatCurrency.js";
+    if (!producto) {
+        return `
+            <div class="container my-5 text-center py-5">
+                <h4>El producto solicitado no existe.</h4>
+                <a href="productos.html" class="btn btn-success mt-3">Volver al catálogo</a>
+            </div>
+        `;
+    }
 
-
-export default {
-
-    components: {
-
-        Header,
-
-        Footer,
-
-        Loading
-
-    },
-
-
-    data() {
-
-        return {
-
-            product: null,
-
-            loading: true,
-
-            error: null
-
-        };
-
-    },
-
-
-    async mounted() {
-
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
-
-
-        const id =
-            params.get("id");
-
-
-        if (!id) {
-
-            this.error =
-                "Producto no especificado.";
-
-            this.loading = false;
-
-            return;
-
-        }
-
-
-        try {
-
-            this.product =
-                await getProductById(id);
-
-
-            if (!this.product) {
-
-                this.error =
-                    "El producto no existe.";
-
-            }
-
-        } catch (error) {
-
-            console.error(error);
-
-            this.error =
-                "No se pudo cargar el producto.";
-
-        } finally {
-
-            this.loading = false;
-
-        }
-
-    },
-
-
-    methods: {
-
-        formatPrice(value) {
-
-            return formatCurrency(value);
-
-        }
-
-    },
-
-
-    template: `
-
-        <div>
-
-            <Header />
-
-
-            <main class="product-detail-page">
-
-                <div class="container">
-
-
-                    <Loading
-                        v-if="loading"
-                        message="Cargando producto..."
-                    />
-
-
-                    <div
-                        v-else-if="error"
-                        class="error-message"
-                    >
-
-                        {{ error }}
-
+    return `
+        <div class="container my-5">
+            <a href="productos.html" class="btn btn-outline-secondary btn-sm mb-4">← Volver al catálogo</a>
+            <div class="card shadow border-0 overflow-hidden">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="${producto.imagen || 'https://via.placeholder.com/500'}" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 300px;" alt="${producto.nombre}">
                     </div>
-
-
-                    <section
-                        v-else
-                        class="product-detail"
-                    >
-
-
-                        <div class="product-detail__image">
-
-                            <img
-                                :src="
-                                    product.imagenPrincipal ||
-                                    'https://placehold.co/800x800?text=Producto'
-                                "
-                                :alt="product.nombre"
-                            >
-
-                        </div>
-
-
-                        <div class="product-detail__info">
-
-
-                            <span
-                                v-if="product.marca"
-                                class="product-detail__brand"
-                            >
-
-                                {{ product.marca }}
-
-                            </span>
-
-
-                            <h1>
-                                {{ product.nombre }}
-                            </h1>
-
-
-                            <div
-                                class="product-detail__price"
-                            >
-
-                                {{ formatPrice(product.precio) }}
-
-                            </div>
-
-
-                            <div
-                                v-if="product.precioAnterior"
-                                class="product-detail__old-price"
-                            >
-
-                                Antes:
-                                {{ formatPrice(product.precioAnterior) }}
-
-                            </div>
-
-
-                            <p
-                                class="product-detail__description"
-                            >
-
-                                {{
-                                    product.descripcion ||
-                                    "Producto disponible en nuestra tienda."
-                                }}
-
-                            </p>
-
-
-                            <div
-                                v-if="product.stock !== undefined"
-                                class="product-detail__stock"
-                            >
-
-                                Stock disponible:
-                                <strong>
-                                    {{ product.stock }}
-                                </strong>
-
-                            </div>
-
-
-                            <button
-                                class="btn btn-primary product-detail__button"
-                            >
-
-                                Agregar al carrito
-
-                            </button>
-
-
-                        </div>
-
-
-                    </section>
-
-
+                    <div class="col-md-6 p-4 p-md-5 d-flex flex-column justify-content-center">
+                        <span class="badge bg-success align-self-start mb-2">${producto.categoria}</span>
+                        <h2 class="fw-bold text-dark">${producto.nombre}</h2>
+                        <h3 class="text-success fw-bold my-3">${formatCurrency(producto.precio)}</h3>
+                        <p class="text-muted mb-4">${producto.descripcion || 'Producto lácteo de alta calidad, elaborado con estándares artesanales para garantizar máxima frescura.'}</p>
+                        <button onclick="alert('Solicitud enviada a la tienda')" class="btn btn-success btn-lg fw-bold">Pedir por WhatsApp 📱</button>
+                    </div>
                 </div>
-
-            </main>
-
-
-            <Footer />
-
+            </div>
         </div>
-
-    `
-
-};
+    `;
+}

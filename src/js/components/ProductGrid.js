@@ -1,24 +1,13 @@
-import ProductCard from "./ProductCard.js";
+import { ProductCard } from "./ProductCard.js";
 
-export default {
-    components: {
-        ProductCard
-    },
-    
-    props: {
-        products: {
-            type: Array,
-            required: true
-        }
-    },
+export function ProductGrid(productos, rutaBase = "") {
+    if (!productos || productos.length === 0) {
+        return `
+            <div class="col-12 text-center text-muted py-5">
+                <h5>No se encontraron productos en esta categoría.</h5>
+            </div>
+        `;
+    }
 
-    template: `
-        <div class="product-grid">
-            <ProductCard
-                v-for="product in products"
-                :key="product.id"
-                :product="product"
-            />
-        </div>
-    `
-};
+    return productos.map(prod => ProductCard(prod, rutaBase)).join('');
+}
