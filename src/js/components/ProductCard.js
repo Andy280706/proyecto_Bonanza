@@ -12,9 +12,15 @@ export function ProductCard(producto, rutaBase = "") {
                     <span class="badge bg-light text-success align-self-start mb-2">${escapeHTML(producto.categoria)}</span>
                     <h6 class="card-title text-dark mb-1">${escapeHTML(producto.nombre)}</h6>
                     <p class="text-success fw-bold fs-5 mb-3">${formatCurrency(producto.precio)}</p>
-                    <a href="${rutaBase}producto.html?id=${escapeHTML(producto.id)}" class="btn btn-success btn-sm w-100 mt-auto">
-                        Ver Detalle 🔎
-                    </a>
+                    <div class="d-grid gap-2 mt-auto">
+                        <a href="${rutaBase}producto.html?id=${escapeHTML(producto.id)}" class="btn btn-outline-success btn-sm">
+                            Ver detalle
+                        </a>
+                        <button type="button" class="btn btn-success btn-sm btn-agregar-carrito"
+                            data-producto-id="${escapeHTML(producto.id)}">
+                            <i class="bi bi-cart-plus me-1"></i>Agregar al carrito
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@ import { obtenerCategorias } from "../services/categoryService.js";
 import { obtenerProductos } from "../services/productService.js";
 import { ProductGrid } from "../components/ProductGrid.js";
 import { escapeHTML } from "../utils/escapeHTML.js";
+import { cartService } from "../services/cartService.js";
 
 export async function ProductsView() {
     const categorias = await obtenerCategorias();
@@ -50,6 +51,23 @@ export async function ProductsView() {
                     const filtrados = productos.filter(p => p.categoria === cat);
                     contenedorProductos.innerHTML = ProductGrid(filtrados, "./");
                 }
+            });
+        }
+
+        if (contenedorProductos) {
+            contenedorProductos.addEventListener("click", (e) => {
+                const button = e.target.closest(".btn-agregar-carrito");
+                if (!button) return;
+                const producto = productos.find(item => item.id === button.dataset.productoId);
+                if (!producto) return;
+                cartService.addItem(producto);
+                const original = button.innerHTML;
+                button.innerHTML = '<i class="bi bi-check2 me-1"></i>Agregado';
+                button.disabled = true;
+                window.setTimeout(() => {
+                    button.innerHTML = original;
+                    button.disabled = false;
+                }, 900);
             });
         }
     }, 0);

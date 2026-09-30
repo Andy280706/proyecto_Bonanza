@@ -1,6 +1,7 @@
 import { obtenerProductoPorId } from "../services/productService.js";
 import { formatCurrency } from "../utils/formatCurrency.js";
 import { escapeHTML } from "../utils/escapeHTML.js";
+import { cartService } from "../services/cartService.js";
 
 export async function ProductDetailView() {
     // Obtener ID desde la URL (?id=XYZ)
@@ -27,6 +28,14 @@ export async function ProductDetailView() {
         `;
     }
 
+    setTimeout(() => {
+        const button = document.getElementById("btnAgregarDetalle");
+        button?.addEventListener("click", () => {
+            cartService.addItem(producto);
+            button.innerHTML = '<i class="bi bi-check2 me-1"></i>Agregado al carrito';
+        });
+    }, 0);
+
     return `
         <div class="container my-5">
             <a href="productos.html" class="btn btn-outline-secondary btn-sm mb-4">← Volver al catálogo</a>
@@ -40,7 +49,12 @@ export async function ProductDetailView() {
                         <h2 class="fw-bold text-dark">${escapeHTML(producto.nombre)}</h2>
                         <h3 class="text-success fw-bold my-3">${formatCurrency(producto.precio)}</h3>
                         <p class="text-muted mb-4">${escapeHTML(producto.descripcion || 'Producto lácteo de alta calidad, elaborado con estándares artesanales para garantizar máxima frescura.')}</p>
-                        <button onclick="alert('Solicitud enviada a la tienda')" class="btn btn-success btn-lg fw-bold">Pedir por WhatsApp 📱</button>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="button" class="btn btn-success btn-lg fw-bold" id="btnAgregarDetalle">
+                                <i class="bi bi-cart-plus me-1"></i>Agregar al carrito
+                            </button>
+                            <a href="carrito.html" class="btn btn-outline-secondary btn-lg">Ir al carrito</a>
+                        </div>
                     </div>
                 </div>
             </div>

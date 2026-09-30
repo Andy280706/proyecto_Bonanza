@@ -36,6 +36,11 @@
                     📩 Mensajes de Clientes
                 </button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pedidos-tab" data-bs-toggle="tab" data-bs-target="#pedidos-panel" type="button" role="tab">
+                    📊 Reporte de ventas
+                </button>
+            </li>
         </ul>
 
         <!-- Contenido de Pestañas -->
@@ -147,11 +152,54 @@
                 </div>
             </div>
 
+            <!-- TAB 4: PEDIDOS Y REPORTE -->
+            <div class="tab-pane fade" id="pedidos-panel" role="tabpanel">
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card card-body border-0 shadow-sm h-100">
+                            <span class="text-muted">Pedidos registrados</span>
+                            <strong id="resumenPedidos" class="fs-3">0</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-body border-0 shadow-sm h-100">
+                            <span class="text-muted">Monto solicitado</span>
+                            <strong id="resumenIngresos" class="fs-3 text-success">S/ 0.00</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-body border-0 shadow-sm h-100">
+                            <span class="text-muted">Pagos pendientes de coordinación</span>
+                            <strong id="resumenPendientes" class="fs-3">0</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info py-2">Los pedidos y montos son simulados; el pago se coordina directamente con el cliente.</div>
+                <div class="card shadow-sm border-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Entrega</th>
+                                    <th>Productos</th>
+                                    <th>Total</th>
+                                    <th>Pago preferido</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaPedidos"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <!-- JS de Bootstrap para activar los clics de las pestañas -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Controlador JS del Administrador -->
     <script type="module" src="./src/js/admin.js"></script>
 </body>

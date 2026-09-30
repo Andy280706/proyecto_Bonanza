@@ -3,6 +3,14 @@ import { Footer } from "./components/Footer.js";
 import { HomeView } from "./views/HomeView.js";
 import { ProductsView } from "./views/ProductsView.js";
 import { ProductDetailView } from "./views/ProductDetailView.js";
+import { cartService } from "./services/cartService.js";
+
+function actualizarContadorCarrito() {
+    const { totalItems } = cartService.getTotals();
+    document.querySelectorAll("[data-cart-count]").forEach(badge => {
+        badge.textContent = totalItems;
+    });
+}
 
 async function renderApp() {
     const app = document.getElementById("app");
@@ -26,6 +34,8 @@ async function renderApp() {
     <main>${viewHTML}</main>
     ${Footer()}
 `;
+    actualizarContadorCarrito();
 }
 
 document.addEventListener("DOMContentLoaded", renderApp);
+window.addEventListener("bonanza:cart-updated", actualizarContadorCarrito);

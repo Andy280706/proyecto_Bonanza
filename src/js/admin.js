@@ -1,6 +1,7 @@
 import { obtenerCategorias, crearCategoria, eliminarCategoria } from "./services/categoryService.js";
 import { obtenerProductos, crearProducto, eliminarProducto } from "./services/productService.js";
 import { obtenerContactos, eliminarContacto } from "./services/contactService.js";
+import { obtenerPedidos, actualizarEstadoPedido } from "./services/orderService.js";
 import { escapeHTML } from "./utils/escapeHTML.js";
 
 /* ==========================================================================
@@ -32,7 +33,8 @@ async function cargarTodo() {
     await Promise.all([
         renderCategorias(),
         renderProductos(),
-        renderContactos()
+        renderContactos(),
+        renderPedidos()
     ]);
 }
 
@@ -182,6 +184,64 @@ if (tablaMsg) {
                 await eliminarContacto(e.target.dataset.id);
                 await renderContactos();
             }
+        }
+    });
+}
+
+/* ==========================================================================
+    4. MÓDULO DE PEDIDOS Y REPORTE DE VENTAS
+    ========================================================================== */
+const tablaPedidos = document.getElementById("tablaPedidos");
+const estadosPedido = ["Recibido", "En preparación", "Listo para recojo", "En camino", "Entregado", "Cancelado"];
+
+async function renderPedidos() {
+    if (!tablaPedidos) return;
+    const pedidos = await obtenerPedidos();
+    const totalSolicitado = pedidos.reduce((total, pedido) => total + Number(pedido.total || 0), 0);
+    const pendientes = pedidos.filter(pedido => pedido.pagoEstado === "Pendiente").length;
+
+    document.getElementById("resumenPedidos").textContent = pedidos.length;
+    document.getElementById("resumenIngresos").textContent = `S/ ${totalSolicitado.toFixed(2)}`;
+    document.getElementById("resumenPendientes").textContent = pendientes;
+
+    tablaPedidos.innerHTML = pedidos.length === 0
+        ? '<tr><td colspan="7" class="text-center text-muted py-4">Aún no hay pedidos registrados.</td></tr>'
+        : pedidos.map(pedido => {
+            const productos = (pedido.productos || []).map(item =>
+                `${escapeHTML(item.cantidad)} x ${escapeHTML(item.nombre)}`
+            ).join("<br>");
+            const fecha = pedido.creadoEn ? new Date(pedido.creadoEn).toLocaleString("es-PE") : "-";
+            const estados = estadosPedido.map(estado => `
+                <option value="${escapeHTML(estado)}" ${pedido.estado === estado ? "selected" : ""}>${escapeHTML(estado)}</option>
+            `).join("");
+
+            return `
+                <tr>
+                    <td class="small">${escapeHTML(fecha)}</td>
+                    <td><strong>${escapeHTML(pedido.cliente)}</strong><br><small>${escapeHTML(pedido.telefono)}</small></td>
+                    <td>${escapeHTML(pedido.tipoEntrega)}${pedido.direccion ? `<br><small>${escapeHTML(pedido.direccion)}, ${escapeHTML(pedido.distrito)}</small>` : ""}</td>
+                    <td>${productos}</td>
+                    <td class="fw-bold text-success">S/ ${Number(pedido.total || 0).toFixed(2)}</td>
+                    <td>${escapeHTML(pedido.metodoPago)}<br><small class="text-muted">${escapeHTML(pedido.pagoEstado)}</small></td>
+                    <td>
+                        <select class="form-select form-select-sm estado-pedido" data-id="${escapeHTML(pedido.id)}" aria-label="Estado del pedido">
+                            ${estados}
+                        </select>
+                    </td>
+                </tr>`;
+        }).join("");
+}
+
+if (tablaPedidos) {
+    tablaPedidos.addEventListener("change", async event => {
+        const selector = event.target.closest(".estado-pedido");
+        if (!selector) return;
+        try {
+            await actualizarEstadoPedido(selector.dataset.id, selector.value);
+        } catch (error) {
+            console.error("No se pudo actualizar el pedido:", error);
+            alert("No se pudo actualizar el estado del pedido.");
+            await renderPedidos();
         }
     });
 }

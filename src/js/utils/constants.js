@@ -1,5 +1,6 @@
 export const COLECCIONES = {
     CATEGORIAS: "categorias",
     PRODUCTOS: "productos",
-    CONTACTOS: "contactos"
+    CONTACTOS: "contactos",
+    PEDIDOS: "pedidos"
 };

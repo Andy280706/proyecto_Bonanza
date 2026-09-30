@@ -7,7 +7,8 @@ export default defineConfig({
                 "index.html",
                 "admin.html",
                 "src/pages/productos.html",
-                "src/pages/producto.html"
+                "src/pages/producto.html",
+                "src/pages/carrito.html"
             ]
         }
     }

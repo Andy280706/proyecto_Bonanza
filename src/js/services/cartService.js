@@ -1,56 +1,70 @@
 const CART_KEY = "carritoBonanza";
 
-export const cartService = {
-    getCart() {
-        return JSON.parse(localStorage.getItem(CART_KEY)) || [];
-    },
+function readCart() {
+    try {
+        const cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+        return Array.isArray(cart) ? cart : [];
+    } catch {
+        return [];
+    }
+}
 
-    saveCart(cart) {
-        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    window.dispatchEvent(new CustomEvent("bonanza:cart-updated"));
+}
+
+export const cartService = {
+    getCart: readCart,
+    saveCart,
+
+    addItem(product) {
+        if (!product?.id) return;
+        const cart = readCart();
+        const existing = cart.find(item => item.id === product.id);
+
+        if (existing) {
+            existing.cantidad += 1;
+        } else {
+            cart.push({
+                id: product.id,
+                nombre: product.nombre || "Producto",
+                precio: Number(product.precio) || 0,
+                imagen: product.imagen || "",
+                categoria: product.categoria || "",
+                cantidad: 1
+            });
+        }
+
+        saveCart(cart);
     },
 
     addToCart(product) {
-        const cart = this.getCart();
-        const index = cart.findIndex(item => item.id === product.id);
-        if (index !== -1) {
-            cart[index].cantidad += 1;
-        } else {
-            cart.push({ ...product, cantidad: 1 });
-        }
-        this.saveCart(cart);
-    },
-
-    updateQuantity(index, cambio) {
-        const cart = this.getCart();
-        if (cart[index]) {
-            cart[index].cantidad += cambio;
-            if (cart[index].cantidad < 1) {
-                cart[index].cantidad = 1;
-            }
-            this.saveCart(cart);
-        }
+        this.addItem(product);
     },
 
     removeItem(index) {
-        const cart = this.getCart();
+        const cart = readCart();
         cart.splice(index, 1);
-        this.saveCart(cart);
+        saveCart(cart);
+    },
+
+    updateQuantity(index, change) {
+        const cart = readCart();
+        if (!cart[index]) return;
+        cart[index].cantidad += change;
+        if (cart[index].cantidad <= 0) cart.splice(index, 1);
+        saveCart(cart);
     },
 
     clearCart() {
-        localStorage.removeItem(CART_KEY);
+        saveCart([]);
     },
 
     getTotals() {
-        const cart = this.getCart();
-        let totalDinero = 0;
-        let totalItems = 0;
-
-        cart.forEach(item => {
-            totalDinero += (item.precio || 0) * (item.cantidad || 0);
-            totalItems += item.cantidad || 0;
-        });
-
-        return { totalDinero, totalItems };
+        return readCart().reduce((totals, item) => ({
+            totalDinero: totals.totalDinero + Number(item.precio) * Number(item.cantidad),
+            totalItems: totals.totalItems + Number(item.cantidad)
+        }), { totalDinero: 0, totalItems: 0 });
     }
 };
