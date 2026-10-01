@@ -6,7 +6,7 @@ export function Header() {
     return `
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
             <div class="container">
-                <a class="navbar-brand fw-bold fs-4" href="${base}index.html">🥛 Lácteos Bonanza</a>
+                <a class="navbar-brand fw-bold fs-4" href="${base}index.html"><img hrelf="./src/ase" >Lácteos Bonanza</a>
                 <div class="collapse navbar-collapse show" id="navMenu">
                     <ul class="navbar-nav ms-auto align-items-center">
                         <li class="nav-item"><a class="nav-link fw-bold" href="${base}index.html">Inicio</a></li>

@@ -1,0 +1,1731 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+public/
+  favicon.svg
+  icons.svg
+src/
+  assets/
+    hero.png
+    javascript.svg
+    vite.svg
+  css/
+    styles.css
+  js/
+    components/
+      Footer.js
+      Header.js
+      ProductCard.js
+      ProductGrid.js
+    firebase/
+      config.js
+    services/
+      cartService.js
+      categoryService.js
+      contactService.js
+      crudService.js
+      orderService.js
+      productService.js
+    utils/
+      constants.js
+      escapeHTML.js
+      formatCurrency.js
+    views/
+      CartView.js
+      HomeView.js
+      ProductDetailView.js
+      ProductsView.js
+    admin.js
+    carrito.js
+    main.js
+  pages/
+    carrito.html
+    producto.html
+    productos.html
+.gitignore
+admin.html
+index.html
+package.json
+README.md
+vite.config.js
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="public/favicon.svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="46" fill="none" viewBox="0 0 48 46"><path fill="#863bff" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z" style="fill:#863bff;fill:color(display-p3 .5252 .23 1);fill-opacity:1"/><mask id="a" width="48" height="46" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#000" d="M25.842 44.938c-.664.844-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.183c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.498 0-3.579-1.842-3.579H1.133c-.92 0-1.456-1.04-.92-1.787L9.91.473c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.578 1.842 3.578h11.377c.943 0 1.473 1.088.89 1.832L25.843 44.94z" style="fill:#000;fill-opacity:1"/></mask><g mask="url(#a)"><g filter="url(#b)"><ellipse cx="5.508" cy="14.704" fill="#ede6ff" rx="5.508" ry="14.704" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -4.47 31.516)"/></g><g filter="url(#c)"><ellipse cx="10.399" cy="29.851" fill="#ede6ff" rx="10.399" ry="29.851" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -39.328 7.883)"/></g><g filter="url(#d)"><ellipse cx="5.508" cy="30.487" fill="#7e14ff" rx="5.508" ry="30.487" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.814 -25.913 -14.639)scale(1 -1)"/></g><g filter="url(#e)"><ellipse cx="5.508" cy="30.599" fill="#7e14ff" rx="5.508" ry="30.599" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.814 -32.644 -3.334)scale(1 -1)"/></g><g filter="url(#f)"><ellipse cx="5.508" cy="30.599" fill="#7e14ff" rx="5.508" ry="30.599" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -34.34 30.47)"/></g><g filter="url(#g)"><ellipse cx="14.072" cy="22.078" fill="#ede6ff" rx="14.072" ry="22.078" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="rotate(93.35 24.506 48.493)scale(-1 1)"/></g><g filter="url(#h)"><ellipse cx="3.47" cy="21.501" fill="#7e14ff" rx="3.47" ry="21.501" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.009 28.708 47.59)scale(-1 1)"/></g><g filter="url(#i)"><ellipse cx="3.47" cy="21.501" fill="#7e14ff" rx="3.47" ry="21.501" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.009 28.708 47.59)scale(-1 1)"/></g><g filter="url(#j)"><ellipse cx=".387" cy="8.972" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(39.51 .387 8.972)"/></g><g filter="url(#k)"><ellipse cx="47.523" cy="-6.092" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 47.523 -6.092)"/></g><g filter="url(#l)"><ellipse cx="41.412" cy="6.333" fill="#47bfff" rx="5.971" ry="9.665" style="fill:#47bfff;fill:color(display-p3 .2799 .748 1);fill-opacity:1" transform="rotate(37.892 41.412 6.333)"/></g><g filter="url(#m)"><ellipse cx="-1.879" cy="38.332" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 -1.88 38.332)"/></g><g filter="url(#n)"><ellipse cx="-1.879" cy="38.332" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 -1.88 38.332)"/></g><g filter="url(#o)"><ellipse cx="35.651" cy="29.907" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 35.651 29.907)"/></g><g filter="url(#p)"><ellipse cx="38.418" cy="32.4" fill="#47bfff" rx="5.971" ry="15.297" style="fill:#47bfff;fill:color(display-p3 .2799 .748 1);fill-opacity:1" transform="rotate(37.892 38.418 32.4)"/></g></g><defs><filter id="b" width="60.045" height="41.654" x="-19.77" y="16.149" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="c" width="90.34" height="51.437" x="-54.613" y="-7.533" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="d" width="79.355" height="29.4" x="-49.64" y="2.03" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="e" width="79.579" height="29.4" x="-45.045" y="20.029" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="f" width="79.579" height="29.4" x="-43.513" y="21.178" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="g" width="74.749" height="58.852" x="15.756" y="-17.901" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="h" width="61.377" height="25.362" x="23.548" y="2.284" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="i" width="61.377" height="25.362" x="23.548" y="2.284" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="j" width="56.045" height="63.649" x="-27.636" y="-22.853" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="k" width="54.814" height="64.646" x="20.116" y="-38.415" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="l" width="33.541" height="35.313" x="24.641" y="-11.323" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="m" width="54.814" height="64.646" x="-29.286" y="6.009" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="n" width="54.814" height="64.646" x="-29.286" y="6.009" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="o" width="54.814" height="64.646" x="8.244" y="-2.416" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="p" width="39.409" height="43.623" x="18.713" y="10.588" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter></defs></svg>
+</file>
+
+<file path="public/icons.svg">
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="bluesky-icon" viewBox="0 0 16 17">
+    <g clip-path="url(#bluesky-clip)"><path fill="#08060d" d="M7.75 7.735c-.693-1.348-2.58-3.86-4.334-5.097-1.68-1.187-2.32-.981-2.74-.79C.188 2.065.1 2.812.1 3.251s.241 3.602.398 4.13c.52 1.744 2.367 2.333 4.07 2.145-2.495.37-4.71 1.278-1.805 4.512 3.196 3.309 4.38-.71 4.987-2.746.608 2.036 1.307 5.91 4.93 2.746 2.72-2.746.747-4.143-1.747-4.512 1.702.189 3.55-.4 4.07-2.145.156-.528.397-3.691.397-4.13s-.088-1.186-.575-1.406c-.42-.19-1.06-.395-2.741.79-1.755 1.24-3.64 3.752-4.334 5.099"/></g>
+    <defs><clipPath id="bluesky-clip"><path fill="#fff" d="M.1.85h15.3v15.3H.1z"/></clipPath></defs>
+  </symbol>
+  <symbol id="discord-icon" viewBox="0 0 20 19">
+    <path fill="#08060d" d="M16.224 3.768a14.5 14.5 0 0 0-3.67-1.153c-.158.286-.343.67-.47.976a13.5 13.5 0 0 0-4.067 0c-.128-.306-.317-.69-.476-.976A14.4 14.4 0 0 0 3.868 3.77C1.546 7.28.916 10.703 1.231 14.077a14.7 14.7 0 0 0 4.5 2.306q.545-.748.965-1.587a9.5 9.5 0 0 1-1.518-.74q.191-.14.372-.293c2.927 1.369 6.107 1.369 8.999 0q.183.152.372.294-.723.437-1.52.74.418.838.963 1.588a14.6 14.6 0 0 0 4.504-2.308c.37-3.911-.63-7.302-2.644-10.309m-9.13 8.234c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.894 0 1.614.82 1.599 1.82.001 1-.705 1.82-1.6 1.82m5.91 0c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.893 0 1.614.82 1.599 1.82 0 1-.706 1.82-1.6 1.82"/>
+  </symbol>
+  <symbol id="documentation-icon" viewBox="0 0 21 20">
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="m15.5 13.333 1.533 1.322c.645.555.967.833.967 1.178s-.322.623-.967 1.179L15.5 18.333m-3.333-5-1.534 1.322c-.644.555-.966.833-.966 1.178s.322.623.966 1.179l1.534 1.321"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M17.167 10.836v-4.32c0-1.41 0-2.117-.224-2.68-.359-.906-1.118-1.621-2.08-1.96-.599-.21-1.349-.21-2.848-.21-2.623 0-3.935 0-4.983.369-1.684.591-3.013 1.842-3.641 3.428C3 6.449 3 7.684 3 10.154v2.122c0 2.558 0 3.838.706 4.726q.306.383.713.671c.76.536 1.79.64 3.581.66"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M3 10a2.78 2.78 0 0 1 2.778-2.778c.555 0 1.209.097 1.748-.047.48-.129.854-.503.982-.982.145-.54.048-1.194.048-1.749a2.78 2.78 0 0 1 2.777-2.777"/>
+  </symbol>
+  <symbol id="github-icon" viewBox="0 0 19 19">
+    <path fill="#08060d" fill-rule="evenodd" d="M9.356 1.85C5.05 1.85 1.57 5.356 1.57 9.694a7.84 7.84 0 0 0 5.324 7.44c.387.079.528-.168.528-.376 0-.182-.013-.805-.013-1.454-2.165.467-2.616-.935-2.616-.935-.349-.91-.864-1.143-.864-1.143-.71-.48.051-.48.051-.48.787.051 1.2.805 1.2.805.695 1.194 1.817.857 2.268.649.064-.507.27-.857.49-1.052-1.728-.182-3.545-.857-3.545-3.87 0-.857.31-1.558.8-2.104-.078-.195-.349-1 .077-2.078 0 0 .657-.208 2.14.805a7.5 7.5 0 0 1 1.946-.26c.657 0 1.328.092 1.946.26 1.483-1.013 2.14-.805 2.14-.805.426 1.078.155 1.883.078 2.078.502.546.799 1.247.799 2.104 0 3.013-1.818 3.675-3.558 3.87.284.247.528.714.528 1.454 0 1.052-.012 1.896-.012 2.156 0 .208.142.455.528.377a7.84 7.84 0 0 0 5.324-7.441c.013-4.338-3.48-7.844-7.773-7.844" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="social-icon" viewBox="0 0 20 20">
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M12.5 6.667a4.167 4.167 0 1 0-8.334 0 4.167 4.167 0 0 0 8.334 0"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M2.5 16.667a5.833 5.833 0 0 1 8.75-5.053m3.837.474.513 1.035c.07.144.257.282.414.309l.93.155c.596.1.736.536.307.965l-.723.73a.64.64 0 0 0-.152.531l.207.903c.164.715-.213.991-.84.618l-.872-.52a.63.63 0 0 0-.577 0l-.872.52c-.624.373-1.003.094-.84-.618l.207-.903a.64.64 0 0 0-.152-.532l-.723-.729c-.426-.43-.289-.864.306-.964l.93-.156a.64.64 0 0 0 .412-.31l.513-1.034c.28-.562.735-.562 1.012 0"/>
+  </symbol>
+  <symbol id="x-icon" viewBox="0 0 19 19">
+    <path fill="#08060d" fill-rule="evenodd" d="M1.893 1.98c.052.072 1.245 1.769 2.653 3.77l2.892 4.114c.183.261.333.48.333.486s-.068.089-.152.183l-.522.593-.765.867-3.597 4.087c-.375.426-.734.834-.798.905a1 1 0 0 0-.118.148c0 .01.236.017.664.017h.663l.729-.83c.4-.457.796-.906.879-.999a692 692 0 0 0 1.794-2.038c.034-.037.301-.34.594-.675l.551-.624.345-.392a7 7 0 0 1 .34-.374c.006 0 .93 1.306 2.052 2.903l2.084 2.965.045.063h2.275c1.87 0 2.273-.003 2.266-.021-.008-.02-1.098-1.572-3.894-5.547-2.013-2.862-2.28-3.246-2.273-3.266.008-.019.282-.332 2.085-2.38l2-2.274 1.567-1.782c.022-.028-.016-.03-.65-.03h-.674l-.3.342a871 871 0 0 1-1.782 2.025c-.067.075-.405.458-.75.852a100 100 0 0 1-.803.91c-.148.172-.299.344-.99 1.127-.304.343-.32.358-.345.327-.015-.019-.904-1.282-1.976-2.808L6.365 1.85H1.8zm1.782.91 8.078 11.294c.772 1.08 1.413 1.973 1.425 1.984.016.017.241.02 1.05.017l1.03-.004-2.694-3.766L7.796 5.75 5.722 2.852l-1.039-.004-1.039-.004z" clip-rule="evenodd"/>
+  </symbol>
+</svg>
+</file>
+
+<file path="src/assets/javascript.svg">
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="32" height="32" viewBox="0 0 256 256"><path fill="#F7DF1E" d="M0 0h256v256H0V0Z"/><path d="m67.312 213.932l19.59-11.856c3.78 6.701 7.218 12.371 15.465 12.371c7.905 0 12.89-3.092 12.89-15.12v-81.798h24.057v82.138c0 24.917-14.606 36.259-35.916 36.259c-19.245 0-30.416-9.967-36.087-21.996m85.07-2.576l19.588-11.341c5.157 8.421 11.859 14.607 23.715 14.607c9.969 0 16.325-4.984 16.325-11.858c0-8.248-6.53-11.17-17.528-15.98l-6.013-2.58c-17.357-7.387-28.87-16.667-28.87-36.257c0-18.044 13.747-31.792 35.228-31.792c15.294 0 26.292 5.328 34.196 19.247l-18.732 12.03c-4.125-7.389-8.591-10.31-15.465-10.31c-7.046 0-11.514 4.468-11.514 10.31c0 7.217 4.468 10.14 14.778 14.608l6.014 2.577c20.45 8.765 31.963 17.7 31.963 37.804c0 21.654-17.012 33.51-39.867 33.51c-22.339 0-36.774-10.654-43.819-24.574"/></svg>
+</file>
+
+<file path="src/assets/vite.svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="77" height="47" fill="none" aria-labelledby="vite-logo-title" viewBox="0 0 77 47"><title id="vite-logo-title">Vite</title><style>.parenthesis{fill:#000}@media (prefers-color-scheme:dark){.parenthesis{fill:#fff}}</style><path fill="#9135ff" d="M40.151 45.71c-.663.844-2.02.374-2.02-.699V34.708a2.26 2.26 0 0 0-2.262-2.262H24.493c-.92 0-1.457-1.04-.92-1.788l7.479-10.471c1.07-1.498 0-3.578-1.842-3.578H15.443c-.92 0-1.456-1.04-.92-1.788l9.696-13.576c.213-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.472c-1.07 1.497 0 3.578 1.842 3.578h11.376c.944 0 1.474 1.087.89 1.83L40.153 45.712z"/><mask id="a" width="48" height="47" x="14" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#000" d="M40.047 45.71c-.663.843-2.02.374-2.02-.699V34.708a2.26 2.26 0 0 0-2.262-2.262H24.389c-.92 0-1.457-1.04-.92-1.788l7.479-10.472c1.07-1.497 0-3.578-1.842-3.578H15.34c-.92 0-1.456-1.04-.92-1.788l9.696-13.575c.213-.297.556-.474.92-.474H53.93c.92 0 1.456 1.04.92 1.788L47.37 13.03c-1.07 1.498 0 3.578 1.842 3.578h11.376c.944 0 1.474 1.088.89 1.831L40.049 45.712z"/></mask><g mask="url(#a)"><g filter="url(#b)"><ellipse cx="5.508" cy="14.704" fill="#eee6ff" rx="5.508" ry="14.704" transform="rotate(269.814 20.96 11.29)scale(-1 1)"/></g><g filter="url(#c)"><ellipse cx="10.399" cy="29.851" fill="#eee6ff" rx="10.399" ry="29.851" transform="rotate(89.814 -16.902 -8.275)scale(1 -1)"/></g><g filter="url(#d)"><ellipse cx="5.508" cy="30.487" fill="#8900ff" rx="5.508" ry="30.487" transform="rotate(89.814 -19.197 -7.127)scale(1 -1)"/></g><g filter="url(#e)"><ellipse cx="5.508" cy="30.599" fill="#8900ff" rx="5.508" ry="30.599" transform="rotate(89.814 -25.928 4.177)scale(1 -1)"/></g><g filter="url(#f)"><ellipse cx="5.508" cy="30.599" fill="#8900ff" rx="5.508" ry="30.599" transform="rotate(89.814 -25.738 5.52)scale(1 -1)"/></g><g filter="url(#g)"><ellipse cx="14.072" cy="22.078" fill="#eee6ff" rx="14.072" ry="22.078" transform="rotate(93.35 31.245 55.578)scale(-1 1)"/></g><g filter="url(#h)"><ellipse cx="3.47" cy="21.501" fill="#8900ff" rx="3.47" ry="21.501" transform="rotate(89.009 35.419 55.202)scale(-1 1)"/></g><g filter="url(#i)"><ellipse cx="3.47" cy="21.501" fill="#8900ff" rx="3.47" ry="21.501" transform="rotate(89.009 35.419 55.202)scale(-1 1)"/></g><g filter="url(#j)"><ellipse cx="14.592" cy="9.743" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(39.51 14.592 9.743)"/></g><g filter="url(#k)"><ellipse cx="61.728" cy="-5.321" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 61.728 -5.32)"/></g><g filter="url(#l)"><ellipse cx="55.618" cy="7.104" fill="#00c2ff" rx="5.971" ry="9.665" transform="rotate(37.892 55.618 7.104)"/></g><g filter="url(#m)"><ellipse cx="12.326" cy="39.103" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 12.326 39.103)"/></g><g filter="url(#n)"><ellipse cx="12.326" cy="39.103" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 12.326 39.103)"/></g><g filter="url(#o)"><ellipse cx="49.857" cy="30.678" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 49.857 30.678)"/></g><g filter="url(#p)"><ellipse cx="52.623" cy="33.171" fill="#00c2ff" rx="5.971" ry="15.297" transform="rotate(37.892 52.623 33.17)"/></g></g><path d="M6.919 0c-9.198 13.166-9.252 33.575 0 46.789h6.215c-9.25-13.214-9.196-33.623 0-46.789zm62.424 0h-6.215c9.198 13.166 9.252 33.575 0 46.789h6.215c9.25-13.214 9.196-33.623 0-46.789" class="parenthesis"/><defs><filter id="b" width="60.045" height="41.654" x="-5.564" y="16.92" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="c" width="90.34" height="51.437" x="-40.407" y="-6.762" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="d" width="79.355" height="29.4" x="-35.435" y="2.801" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="e" width="79.579" height="29.4" x="-30.84" y="20.8" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="f" width="79.579" height="29.4" x="-29.307" y="21.949" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="g" width="74.749" height="58.852" x="29.961" y="-17.13" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="h" width="61.377" height="25.362" x="37.754" y="3.055" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="i" width="61.377" height="25.362" x="37.754" y="3.055" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="j" width="56.045" height="63.649" x="-13.43" y="-22.082" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="k" width="54.814" height="64.646" x="34.321" y="-37.644" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="l" width="33.541" height="35.313" x="38.847" y="-10.552" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="m" width="54.814" height="64.646" x="-15.081" y="6.78" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="n" width="54.814" height="64.646" x="-15.081" y="6.78" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="o" width="54.814" height="64.646" x="22.45" y="-1.645" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="p" width="39.409" height="43.623" x="32.919" y="11.36" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter></defs></svg>
+</file>
+
+<file path="src/css/styles.css">
+/* ==========================================================================
+   LÁCTEOS BONANZA S.A. - HOJA DE ESTILOS UNIFICADA
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap');
+
+/* Variables Oficiales de Marca */
+:root {
+    --amarillo-bonanza: #FFB300;   /* Primario: Navbars, encabezados */
+    --verde-frescura: #00A896;     /* Secundario: Títulos, precios */
+    --naranja-vibrante: #E65100;   /* Acento: Botones principales */
+    --blanco-neutro: #FFFFFF;      /* Tarjetas y contenedores */
+    --gris-oscuro: #212529;         /* Textos y Footer */
+    --fondo-pagina: #FDFBF7;       /* Fondo crema lácteo */
+}
+
+/* Reset y Layout para Sticky Footer */
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: var(--fondo-pagina);
+    color: var(--gris-oscuro);
+    font-family: 'Nunito', sans-serif;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    margin-top: auto !important;
+    background-color: var(--gris-oscuro) !important;
+    color: var(--blanco-neutro);
+}
+
+/* Tipografías de Títulos */
+h1, h2, h3, h4, h5, h6, 
+.navbar-brand, 
+.card-title {
+    font-family: 'Fredoka', cursive, sans-serif;
+}
+
+/* Componentes Sobrescritos */
+.navbar {
+    background-color: var(--amarillo-bonanza) !important;
+}
+
+.navbar-brand, .nav-link {
+    color: var(--gris-oscuro) !important;
+}
+
+.text-success {
+    color: var(--verde-frescura) !important;
+}
+
+.btn-success {
+    background-color: var(--naranja-vibrante) !important;
+    border-color: var(--naranja-vibrante) !important;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.btn-success:hover {
+    background-color: #BF360C !important;
+    border-color: #BF360C !important;
+}
+
+.btn-outline-success {
+    color: var(--verde-frescura) !important;
+    border-color: var(--verde-frescura) !important;
+}
+
+.btn-outline-success:hover, 
+.btn-outline-success.active {
+    background-color: var(--verde-frescura) !important;
+    color: var(--blanco-neutro) !important;
+}
+
+.card {
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+</file>
+
+<file path="src/js/services/contactService.js">
+import { getItems, createItem, deleteItem } from "./crudService.js";
+import { COLECCIONES } from "../utils/constants.js";
+
+export const obtenerContactos = () => getItems(COLECCIONES.CONTACTOS);
+export const crearContacto = (data) => createItem(COLECCIONES.CONTACTOS, data);
+export const eliminarContacto = (id) => deleteItem(COLECCIONES.CONTACTOS, id);
+</file>
+
+<file path="src/js/services/orderService.js">
+import { getItems, createItem, updateItem } from "./crudService.js";
+import { COLECCIONES } from "../utils/constants.js";
+
+export const obtenerPedidos = async () => {
+    const pedidos = await getItems(COLECCIONES.PEDIDOS);
+    return pedidos.sort((a, b) => new Date(b.creadoEn) - new Date(a.creadoEn));
+};
+
+export const crearPedido = (pedido) => createItem(COLECCIONES.PEDIDOS, {
+    ...pedido,
+    estado: "Recibido",
+    creadoEn: new Date().toISOString()
+});
+
+export const actualizarEstadoPedido = (id, estado) =>
+    updateItem(COLECCIONES.PEDIDOS, id, { estado });
+</file>
+
+<file path="src/js/utils/escapeHTML.js">
+const replacements = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+};
+
+export function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, character => replacements[character]);
+}
+</file>
+
+<file path="src/js/utils/formatCurrency.js">
+export function formatCurrency(value) {
+
+    const number = Number(value) || 0;
+
+    return new Intl.NumberFormat(
+        "es-PE",
+        {
+            style: "currency",
+            currency: "PEN"
+        }
+    ).format(number);
+}
+</file>
+
+<file path="src/js/carrito.js">
+import { CartView } from "./views/CartView.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+    new CartView().init();
+});
+</file>
+
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+</file>
+
+<file path="package.json">
+{
+  "name": "proyecto-bonanza",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.3.0"
+  }
+}
+</file>
+
+<file path="README.md">
+# proyecto_Bonanza
+</file>
+
+<file path="src/js/components/Footer.js">
+export function Footer() {
+    return `
+        <footer class="py-4 text-center">
+            <div class="container">
+                <p class="mb-1 fw-bold">🥛 Lácteos Bonanza - Calidad y Sabor del Campo</p>
+                <p class="mb-0 small text-white-50">&copy; 2026 Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    `;
+}
+</file>
+
+<file path="src/js/components/ProductGrid.js">
+import { ProductCard } from "./ProductCard.js";
+
+export function ProductGrid(productos, rutaBase = "") {
+    if (!productos || productos.length === 0) {
+        return `
+            <div class="col-12 text-center text-muted py-5">
+                <h5>No se encontraron productos en esta categoría.</h5>
+            </div>
+        `;
+    }
+
+    return productos.map(prod => ProductCard(prod, rutaBase)).join('');
+}
+</file>
+
+<file path="src/js/firebase/config.js">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDd92abtSNQK0EnL76Dux0sn1bq7fR_g70",
+  authDomain: "proyecto-bonanza-e0fa3.firebaseapp.com",
+  projectId: "proyecto-bonanza-e0fa3",
+  storageBucket: "proyecto-bonanza-e0fa3.firebasestorage.app",
+  messagingSenderId: "1064243018142",
+  appId: "1:1064243018142:web:4ee1f7ef6bcab7be55fe8f"
+};
+
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+</file>
+
+<file path="src/js/services/cartService.js">
+const CART_KEY = "carritoBonanza";
+
+function readCart() {
+    try {
+        const cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+        return Array.isArray(cart) ? cart : [];
+    } catch {
+        return [];
+    }
+}
+
+function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    window.dispatchEvent(new CustomEvent("bonanza:cart-updated"));
+}
+
+export const cartService = {
+    getCart: readCart,
+    saveCart,
+
+    addItem(product) {
+        if (!product?.id) return;
+        const cart = readCart();
+        const existing = cart.find(item => item.id === product.id);
+
+        if (existing) {
+            existing.cantidad += 1;
+        } else {
+            cart.push({
+                id: product.id,
+                nombre: product.nombre || "Producto",
+                precio: Number(product.precio) || 0,
+                imagen: product.imagen || "",
+                categoria: product.categoria || "",
+                cantidad: 1
+            });
+        }
+
+        saveCart(cart);
+    },
+
+    addToCart(product) {
+        this.addItem(product);
+    },
+
+    removeItem(index) {
+        const cart = readCart();
+        cart.splice(index, 1);
+        saveCart(cart);
+    },
+
+    updateQuantity(index, change) {
+        const cart = readCart();
+        if (!cart[index]) return;
+        cart[index].cantidad += change;
+        if (cart[index].cantidad <= 0) cart.splice(index, 1);
+        saveCart(cart);
+    },
+
+    clearCart() {
+        saveCart([]);
+    },
+
+    getTotals() {
+        return readCart().reduce((totals, item) => ({
+            totalDinero: totals.totalDinero + Number(item.precio) * Number(item.cantidad),
+            totalItems: totals.totalItems + Number(item.cantidad)
+        }), { totalDinero: 0, totalItems: 0 });
+    }
+};
+</file>
+
+<file path="src/js/services/categoryService.js">
+import { getItems, createItem, updateItem, deleteItem } from "./crudService.js";
+import { COLECCIONES } from "../utils/constants.js";
+
+export const obtenerCategorias = () => getItems(COLECCIONES.CATEGORIAS);
+export const crearCategoria = (data) => createItem(COLECCIONES.CATEGORIAS, data);
+export const actualizarCategoria = (id, data) => updateItem(COLECCIONES.CATEGORIAS, id, data);
+export const eliminarCategoria = (id) => deleteItem(COLECCIONES.CATEGORIAS, id);
+</file>
+
+<file path="src/js/services/crudService.js">
+import { db } from "../firebase/config.js";
+import { 
+    collection, getDocs, addDoc, doc, deleteDoc, getDoc, updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+export const getItems = async (col) => {
+    const snap = await getDocs(collection(db, col));
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+};
+
+export const getItemById = async (col, id) => {
+    const snap = await getDoc(doc(db, col, id));
+    return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+};
+
+export const createItem = async (col, data) => (await addDoc(collection(db, col), data)).id;
+
+export const updateItem = (col, id, data) => updateDoc(doc(db, col, id), data);
+
+export const deleteItem = (col, id) => deleteDoc(doc(db, col, id));
+</file>
+
+<file path="src/js/services/productService.js">
+import { getItems, getItemById, createItem, updateItem, deleteItem } from "./crudService.js";
+import { COLECCIONES } from "../utils/constants.js";
+
+export const obtenerProductos = () => getItems(COLECCIONES.PRODUCTOS);
+export const obtenerProductoPorId = (id) => getItemById(COLECCIONES.PRODUCTOS, id);
+export const crearProducto = (data) => createItem(COLECCIONES.PRODUCTOS, data);
+export const actualizarProducto = (id, data) => updateItem(COLECCIONES.PRODUCTOS, id, data);
+export const eliminarProducto = (id) => deleteItem(COLECCIONES.PRODUCTOS, id);
+</file>
+
+<file path="src/js/views/CartView.js">
+import { cartService } from '../services/cartService.js';
+import { crearPedido } from '../services/orderService.js';
+import { formatCurrency } from '../utils/formatCurrency.js';
+import { escapeHTML } from '../utils/escapeHTML.js';
+
+export class CartView {
+    constructor() {
+        this.contenedor = document.getElementById("contenedorDetalleCarrito");
+        this.txtCant = document.getElementById("cantProductosTexto");
+        this.subtotalLabel = document.getElementById("resumenSubtotal");
+        this.totalLabel = document.getElementById("resumenTotal");
+        this.formCheckout = document.getElementById("formCheckoutPage");
+        this.checkoutFeedback = document.getElementById("checkoutFeedback");
+        this.checkoutButton = document.getElementById("btnContinuarCompra");
+        this.tipoEntrega = document.getElementById("tipoEntrega");
+        this.datosDomicilio = document.getElementById("datosDomicilio");
+    }
+
+    init() {
+        this.render();
+        this.bindEvents();
+    }
+
+    render() {
+        const cart = cartService.getCart();
+        const { totalDinero, totalItems } = cartService.getTotals();
+
+        if (!this.contenedor) return;
+
+        if (cart.length === 0) {
+            this.contenedor.innerHTML = `
+                <div class="text-center py-5 text-muted">
+                    <i class="bi bi-cart-x display-4"></i>
+                    <p class="mt-2">Tu carrito está vacío actualmente.</p>
+                </div>`;
+            if (this.txtCant) this.txtCant.innerText = "Productos (0)";
+            if (this.subtotalLabel) this.subtotalLabel.innerText = formatCurrency ? formatCurrency(0) : "S/. 0.00";
+            if (this.totalLabel) this.totalLabel.innerText = formatCurrency ? formatCurrency(0) : "S/. 0.00";
+            if (this.checkoutButton) this.checkoutButton.disabled = true;
+            return;
+        }
+
+        this.contenedor.innerHTML = cart.map((item, index) => {
+            const imagenSrc = escapeHTML(item.imagen || item.imagenUrl || item.image || '');
+            const imagenHTML = imagenSrc 
+                ? `<img src="${imagenSrc}" alt="${escapeHTML(item.nombre)}" class="img-fluid rounded" style="max-height: 100%; max-width: 100%; object-fit: contain;">`
+                : `<i class="bi bi-box-seam text-secondary fs-3"></i>`;
+
+            const precioFormateado = formatCurrency ? formatCurrency(item.precio) : `S/. ${Number(item.precio).toFixed(2)}`;
+
+            return `
+                <div class="row align-items-center mb-4 border-bottom pb-4">
+                    <div class="col-md-6 col-12 mb-3 mb-md-0">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-light rounded p-2 text-center me-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                                ${imagenHTML}
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">${escapeHTML(item.nombre || item.title || 'Producto')}</h6>
+                                <small class="text-muted d-block">Vendido por: Bonanza S.A.</small>
+                                <button class="btn btn-link text-danger p-0 mt-1 small text-decoration-none btn-eliminar" data-index="${index}">
+                                    <i class="bi bi-trash3"></i> Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 col-6 text-md-center">
+                        <span class="text-muted small d-block d-md-none">Precio unitario:</span>
+                        <span class="fw-bold">${precioFormateado}</span>
+                    </div>
+
+                    <div class="col-md-3 col-6 text-end text-md-center">
+                        <span class="text-muted small d-block d-md-none">Cantidad:</span>
+                        <div class="input-group input-group-sm justify-content-md-center justify-content-end" style="max-width: 120px; margin-left: auto; margin-right: auto;">
+                            <button class="btn btn-outline-secondary btn-cambiar-cant" data-index="${index}" data-cambio="-1">-</button>
+                            <input type="text" class="form-control text-center bg-white" value="${item.cantidad}" readonly style="max-width: 40px;">
+                            <button class="btn btn-outline-secondary btn-cambiar-cant" data-index="${index}" data-cambio="1">+</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        if (this.txtCant) this.txtCant.innerText = `Productos (${totalItems})`;
+        const totalFormateado = formatCurrency ? formatCurrency(totalDinero) : `S/. ${totalDinero.toFixed(2)}`;
+        if (this.subtotalLabel) this.subtotalLabel.innerText = totalFormateado;
+        if (this.totalLabel) this.totalLabel.innerText = totalFormateado;
+        if (this.checkoutButton) this.checkoutButton.disabled = false;
+    }
+
+    bindEvents() {
+        if (this.contenedor) {
+            this.contenedor.addEventListener("click", (e) => {
+                const btnEliminar = e.target.closest(".btn-eliminar");
+                if (btnEliminar) {
+                    const index = parseInt(btnEliminar.dataset.index, 10);
+                    cartService.removeItem(index);
+                    this.render();
+                    return;
+                }
+
+                const btnCant = e.target.closest(".btn-cambiar-cant");
+                if (btnCant) {
+                    const index = parseInt(btnCant.dataset.index, 10);
+                    const cambio = parseInt(btnCant.dataset.cambio, 10);
+                    cartService.updateQuantity(index, cambio);
+                    this.render();
+                }
+            });
+        }
+
+        if (this.formCheckout) {
+            this.tipoEntrega?.addEventListener("change", () => this.actualizarCamposEntrega());
+            this.actualizarCamposEntrega();
+
+            this.formCheckout.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const cart = cartService.getCart();
+                if (cart.length === 0) return;
+
+                const formData = new FormData(this.formCheckout);
+                const metodoPago = formData.get("metodoPago");
+                const pedido = {
+                    cliente: String(formData.get("nombreCliente")).trim(),
+                    telefono: String(formData.get("telefonoCliente")).trim(),
+                    tipoEntrega: String(formData.get("tipoEntrega")),
+                    distrito: String(formData.get("distrito") || "").trim(),
+                    direccion: String(formData.get("direccion") || "").trim(),
+                    metodoPago: String(metodoPago),
+                    pagoEstado: "Pendiente",
+                    productos: cart.map(item => ({
+                        id: item.id,
+                        nombre: item.nombre,
+                        precio: Number(item.precio),
+                        cantidad: Number(item.cantidad)
+                    })),
+                    total: cart.reduce((sum, item) => sum + Number(item.precio) * Number(item.cantidad), 0)
+                };
+
+                const submitButton = this.formCheckout.querySelector('[type="submit"]');
+                if (submitButton) submitButton.disabled = true;
+
+                try {
+                    const pedidoId = await crearPedido(pedido);
+                    const mensaje = [
+                        `Hola, quiero coordinar el pedido ${pedidoId} de Bonanza.`,
+                        ...pedido.productos.map(item => `${item.cantidad} x ${item.nombre} - ${formatCurrency(item.precio * item.cantidad)}`),
+                        `Total: ${formatCurrency(pedido.total)}`,
+                        `Entrega: ${pedido.tipoEntrega}`,
+                        pedido.direccion ? `Dirección: ${pedido.direccion}, ${pedido.distrito}` : "",
+                        `Pago preferido: ${pedido.metodoPago} (pendiente de coordinación)`
+                    ].filter(Boolean).join("\n");
+
+                    cartService.clearCart();
+                    this.render();
+                    this.formCheckout.reset();
+                    this.actualizarCamposEntrega();
+                    window.bootstrap?.Modal.getOrCreateInstance(document.getElementById("modalPago")).hide();
+                    if (this.checkoutFeedback) {
+                        this.checkoutFeedback.innerHTML = `
+                            <div class="alert alert-success">
+                                Pedido <strong>${escapeHTML(pedidoId)}</strong> registrado. El pago sigue pendiente y será coordinado por WhatsApp.
+                                <a class="alert-link d-block mt-2" target="_blank" rel="noopener noreferrer"
+                                    href="https://wa.me/?text=${encodeURIComponent(mensaje)}">
+                                    <i class="bi bi-whatsapp me-1"></i>Continuar por WhatsApp
+                                </a>
+                            </div>`;
+                    }
+                } catch (error) {
+                    console.error("No se pudo registrar el pedido:", error);
+                    if (this.checkoutFeedback) {
+                        this.checkoutFeedback.innerHTML = '<div class="alert alert-danger">No se pudo registrar el pedido. Inténtalo nuevamente.</div>';
+                    }
+                } finally {
+                    if (submitButton) submitButton.disabled = false;
+                }
+            });
+        }
+    }
+
+    actualizarCamposEntrega() {
+        if (!this.tipoEntrega || !this.datosDomicilio) return;
+        const requiereDomicilio = this.tipoEntrega.value === "Entrega a domicilio";
+        this.datosDomicilio.classList.toggle("d-none", !requiereDomicilio);
+        this.datosDomicilio.querySelectorAll("input").forEach(input => {
+            input.required = requiereDomicilio;
+        });
+    }
+}
+</file>
+
+<file path="src/pages/carrito.html">
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Bonanza</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+    <!-- Header / Navbar Principal -->
+    <header class="bg-white shadow-sm mb-4">
+        <nav class="navbar navbar-expand-lg navbar-light container">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold" href="../../index.html">
+                    <i class="bi bi-shop me-2"></i>BONANZA
+                </a>
+                <div class="d-flex">
+                    <a href="productos.html" class="btn btn-outline-secondary btn-sm">
+                        <i class="bi bi-arrow-left me-1"></i> Seguir comprando
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-4">
+        <h2 class="mb-4 fw-bold"><i class="bi bi-cart3 me-2"></i>Tu carrito</h2>
+        <div id="checkoutFeedback" class="mb-3" aria-live="polite"></div>
+
+        <div class="row g-4">
+            <!-- Lista de Productos a la Izquierda -->
+            <div class="col-lg-8 col-12">
+                <div class="card shadow-sm border-0 p-4 mb-3 bg-white">
+                    <h5 class="border-bottom pb-3 mb-3 fw-bold" id="cantProductosTexto">Productos (0)</h5>
+
+                    <!-- Contenedor dinámico donde JavaScript pintará los productos -->
+                    <div id="contenedorDetalleCarrito">
+                        <div class="text-center py-5 text-muted">
+                            <i class="bi bi-cart-x display-4"></i>
+                            <p class="mt-2">Tu carrito está vacío actualmente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen de la Orden a la Derecha -->
+            <div class="col-lg-4 col-12">
+                <div class="card shadow-sm border-0 p-4 bg-white sticky-top" style="top: 20px; z-index: 10;">
+                    <h5 class="fw-bold border-bottom pb-3 mb-3">Resumen de la orden</h5>
+
+                    <div class="d-flex justify-content-between mb-2 text-muted">
+                        <span>Subtotal productos</span>
+                        <span id="resumenSubtotal">S/. 0.00</span>
+                    </div>
+                    <hr>
+
+                    <div class="d-flex justify-content-between mb-4 fs-4 fw-bold">
+                        <span>Total:</span>
+                        <span class="text-success" id="resumenTotal">S/. 0.00</span>
+                    </div>
+
+                    <button id="btnContinuarCompra" class="btn btn-success w-100 py-3 fw-bold mb-2" data-bs-toggle="modal"
+                        data-bs-target="#modalPago" disabled>
+                        Continuar compra <i class="bi bi-arrow-right ms-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Pago y Envío -->
+    <div class="modal fade" id="modalPago" tabindex="-1" aria-labelledby="modalPagoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalPagoLabel">
+                        <i class="bi bi-lock-fill me-2"></i>Formulario de Pago y Envío
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="formCheckoutPage">
+                        <h6 class="text-secondary border-bottom pb-2 mb-3 fw-bold">Datos del cliente</h6>
+                        <div class="mb-3">
+                            <label for="nombreCliente" class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="nombreCliente" placeholder="Ej. Juan Pérez"
+                                required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="telefonoCliente" class="form-label">Teléfono / WhatsApp</label>
+                                <input type="tel" class="form-control" id="telefonoCliente" placeholder="987654321"
+                                    required>
+                            </div>
+                        </div>
+                        <h6 class="text-secondary border-bottom pb-2 mb-3 mt-2 fw-bold">Entrega</h6>
+                        <div class="mb-3">
+                            <label for="tipoEntrega" class="form-label">Modalidad</label>
+                            <select class="form-select" id="tipoEntrega" name="tipoEntrega" required>
+                                <option value="Recojo en tienda">Recojo en tienda</option>
+                                <option value="Entrega a domicilio">Entrega a domicilio</option>
+                            </select>
+                        </div>
+                        <div id="datosDomicilio" class="d-none">
+                            <div class="mb-3">
+                                <label for="distritoCliente" class="form-label">Distrito</label>
+                                <input type="text" class="form-control" id="distritoCliente" name="distrito"
+                                    placeholder="Ej. Apata / Huancayo">
+                            </div>
+                            <div class="mb-3">
+                            <label for="direccionCliente" class="form-label">Dirección de Entrega</label>
+                                <input type="text" class="form-control" id="direccionCliente" name="direccion"
+                                    placeholder="Av. Principal 123">
+                            </div>
+                        </div>
+
+                        <h6 class="text-secondary border-bottom pb-2 mb-3 mt-4 fw-bold">Método de Pago Preferido</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="metodoPago" id="pagoYape" value="Yape / Plin (coordinar por WhatsApp)" checked>
+                            <label class="form-check-label" for="pagoYape">Yape / Plin</label>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="radio" name="metodoPago" id="pagoEfectivo" value="Efectivo contra entrega">
+                            <label class="form-check-label" for="pagoEfectivo">Efectivo contra entrega</label>
+                        </div>
+                        <p class="small text-muted mb-3">Pedido simulado: no se realizará ningún cobro en esta página.</p>
+
+                        <div class="d-flex gap-2 justify-content-end">
+                            <button type="button" class="btn btn-secondary px-4"
+                                data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="bi bi-check-circle me-1"></i> Confirmar Pedido
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/carrito.js"></script>
+</body>
+
+</html>
+</file>
+
+<file path="admin.html">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración | Lácteos Bonanza</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./src/css/styles.css">
+</head>
+<body class="bg-light">
+
+    <!-- Barra Superior -->
+    <nav class="navbar navbar-dark bg-dark mb-4 shadow">
+        <div class="container">
+            <span class="navbar-brand fw-bold">🥛 Lácteos Bonanza - Panel Admin</span>
+            <a href="index.html" class="btn btn-outline-light btn-sm">Ir a la Tienda 🛒</a>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <!-- Pestañas de Navegación -->
+        <ul class="nav nav-tabs fw-bold mb-4" id="adminTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="cat-tab" data-bs-toggle="tab" data-bs-target="#cat-panel" type="button" role="tab">
+                    📁 Tipos de Lácteos (Categorías)
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="prod-tab" data-bs-toggle="tab" data-bs-target="#prod-panel" type="button" role="tab">
+                    🧀 Catálogo de Productos
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="msg-tab" data-bs-toggle="tab" data-bs-target="#msg-panel" type="button" role="tab">
+                    📩 Mensajes de Clientes
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pedidos-tab" data-bs-toggle="tab" data-bs-target="#pedidos-panel" type="button" role="tab">
+                    📊 Reporte de ventas
+                </button>
+            </li>
+        </ul>
+
+        <!-- Contenido de Pestañas -->
+        <div class="tab-content" id="adminTabsContent">
+            
+            <!-- TAB 1: CATEGORÍAS -->
+            <div class="tab-pane fade show active" id="cat-panel" role="tabpanel">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <form id="formCategoria" class="card card-body shadow-sm border-0">
+                            <h5 class="card-title mb-3">Nueva Categoría</h5>
+                            <input type="hidden" id="catId">
+                            <div class="mb-3">
+                                <label for="catNombre" class="form-label fw-bold">Nombre</label>
+                                <input type="text" id="catNombre" class="form-control" placeholder="Ej: Quesos, Leches" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="catDescripcion" class="form-label fw-bold">Descripción</label>
+                                <input type="text" id="catDescripcion" class="form-control" placeholder="Ej: Quesos artesanales">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Guardar Categoría</button>
+                        </form>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-0">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Descripción</th>
+                                            <th class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaCategorias"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: PRODUCTOS -->
+            <div class="tab-pane fade" id="prod-panel" role="tabpanel">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <form id="formProducto" class="card card-body shadow-sm border-0">
+                            <h5 class="card-title mb-3">Nuevo Producto Lácteo</h5>
+                            <input type="hidden" id="prodId">
+                            <div class="mb-3">
+                                <label for="prodNombre" class="form-label fw-bold">Nombre</label>
+                                <input type="text" id="prodNombre" class="form-control" placeholder="Ej: Queso Paria 500g" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="prodPrecio" class="form-label fw-bold">Precio (S/)</label>
+                                <input type="number" step="0.01" id="prodPrecio" class="form-control" placeholder="Ej: 18.00" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="prodCategoria" class="form-label fw-bold">Categoría</label>
+                                <select id="prodCategoria" class="form-select" required>
+                                    <option value="">Seleccione categoría...</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="prodImagen" class="form-label fw-bold">URL Imagen</label>
+                                <input type="url" id="prodImagen" class="form-control" placeholder="https://...">
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Guardar Producto</button>
+                        </form>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-0">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Imagen</th>
+                                            <th>Producto</th>
+                                            <th>Categoría</th>
+                                            <th>Precio</th>
+                                            <th class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaProductos"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: MENSAJES DE CLIENTES -->
+            <div class="tab-pane fade" id="msg-panel" role="tabpanel">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-0">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Correo</th>
+                                    <th>Mensaje</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaContactos"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: PEDIDOS Y REPORTE -->
+            <div class="tab-pane fade" id="pedidos-panel" role="tabpanel">
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card card-body border-0 shadow-sm h-100">
+                            <span class="text-muted">Pedidos registrados</span>
+                            <strong id="resumenPedidos" class="fs-3">0</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-body border-0 shadow-sm h-100">
+                            <span class="text-muted">Monto solicitado</span>
+                            <strong id="resumenIngresos" class="fs-3 text-success">S/ 0.00</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-body border-0 shadow-sm h-100">
+                            <span class="text-muted">Pagos pendientes de coordinación</span>
+                            <strong id="resumenPendientes" class="fs-3">0</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info py-2">Los pedidos y montos son simulados; el pago se coordina directamente con el cliente.</div>
+                <div class="card shadow-sm border-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Entrega</th>
+                                    <th>Productos</th>
+                                    <th>Total</th>
+                                    <th>Pago preferido</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaPedidos"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JS de Bootstrap para activar los clics de las pestañas -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Controlador JS del Administrador -->
+    <script type="module" src="./src/js/admin.js"></script>
+</body>
+</html>
+</file>
+
+<file path="vite.config.js">
+import { defineConfig } from "vite";
+
+export default defineConfig({
+    build: {
+        rollupOptions: {
+            input: [
+                "index.html",
+                "admin.html",
+                "src/pages/productos.html",
+                "src/pages/producto.html",
+                "src/pages/carrito.html"
+            ]
+        }
+    }
+});
+</file>
+
+<file path="src/js/components/Header.js">
+export function Header() {
+    const enPages = window.location.pathname.includes("/src/pages/");
+    const base = enPages ? "../../" : "./";
+    const pagesBase = enPages ? "./" : "./src/pages/";
+
+    return `
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-4" href="${base}index.html">🥛 Lácteos Bonanza</a>
+                <div class="collapse navbar-collapse show" id="navMenu">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item"><a class="nav-link fw-bold" href="${base}index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link fw-bold" href="${pagesBase}productos.html">Catálogo</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="${pagesBase}carrito.html">
+                                <i class="bi bi-cart3 me-1"></i>Carrito
+                                <span class="badge rounded-pill text-bg-dark" data-cart-count>0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    `;
+}
+</file>
+
+<file path="src/js/views/HomeView.js">
+import { obtenerProductos } from "../services/productService.js";
+import { crearContacto } from "../services/contactService.js";
+import { ProductGrid } from "../components/ProductGrid.js";
+
+export async function HomeView() {
+    const productos = await obtenerProductos();
+    // Mostramos solo los primeros 4 productos como destacados
+    const destacados = productos.slice(0, 4);
+
+    const html = `
+        <!-- Banner Principal -->
+        <header class="bg-white py-5 text-center border-bottom shadow-sm">
+            <div class="container">
+                <h1 class="display-5 fw-bold text-success">🥛 Lácteos Bonanza</h1>
+                <p class="lead text-muted">Productos 100% frescos del campo a tu mesa.</p>
+                <a href="./src/pages/productos.html" class="btn btn-success fw-bold px-4 py-2">Ver Catálogo Completo 🧀</a>
+            </div>
+        </header>
+
+        <main class="container my-5">
+            <!-- Productos Destacados -->
+            <section class="mb-5">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="fw-bold text-success mb-0">Productos Destacados</h3>
+                    <a href="./src/pages/productos.html" class="text-success text-decoration-none fw-bold">Ver todos →</a>
+                </div>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+                    ${ProductGrid(destacados, "./src/pages/")}
+                </div>
+            </section>
+
+            <!-- Sección de Contacto Integrada -->
+            <section class="pt-4 border-top">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card shadow border-0 p-4">
+                            <h4 class="text-center text-success fw-bold mb-3">📩 Déjanos tu Consulta o Pedido</h4>
+                            <form id="formContacto">
+                                <div class="mb-3">
+                                    <label for="contactoNombre" class="form-label fw-bold">Nombre</label>
+                                    <input type="text" id="contactoNombre" class="form-control" placeholder="Tu nombre completo" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactoCorreo" class="form-label fw-bold">Correo Electrónico</label>
+                                    <input type="email" id="contactoCorreo" class="form-control" placeholder="nombre@correo.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactoMensaje" class="form-label fw-bold">Mensaje</label>
+                                    <textarea id="contactoMensaje" class="form-control" rows="3" placeholder="¿Qué productos deseas solicitar?" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100 fw-bold">Enviar Mensaje</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    `;
+
+    // Asignar el evento al formulario de contacto
+    setTimeout(() => {
+        const formContacto = document.getElementById("formContacto");
+        if (formContacto) {
+            formContacto.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                await crearContacto({
+                    nombre: document.getElementById("contactoNombre").value.trim(),
+                    correo: document.getElementById("contactoCorreo").value.trim(),
+                    mensaje: document.getElementById("contactoMensaje").value.trim(),
+                    fecha: new Date().toLocaleDateString("es-PE")
+                });
+                alert("¡Gracias por escribirnos! Tu mensaje ha sido enviado.");
+                formContacto.reset();
+            });
+        }
+    }, 0);
+
+    return html;
+}
+</file>
+
+<file path="src/js/admin.js">
+import { obtenerCategorias, crearCategoria, eliminarCategoria } from "./services/categoryService.js";
+import { obtenerProductos, crearProducto, eliminarProducto } from "./services/productService.js";
+import { obtenerContactos, eliminarContacto } from "./services/contactService.js";
+import { obtenerPedidos, actualizarEstadoPedido } from "./services/orderService.js";
+import { escapeHTML } from "./utils/escapeHTML.js";
+
+/* ==========================================================================
+   ELEMENTOS DEL DOM
+   ========================================================================== */
+const adminTabs = document.getElementById("adminTabs");
+
+// Categorías
+const formCat = document.getElementById("formCategoria");
+const tablaCat = document.getElementById("tablaCategorias");
+const selectCat = document.getElementById("prodCategoria");
+
+// Productos
+const formProd = document.getElementById("formProducto");
+const tablaProd = document.getElementById("tablaProductos");
+
+// Mensajes
+const tablaMsg = document.getElementById("tablaContactos");
+
+/* ==========================================================================
+   INICIALIZACIÓN
+   ========================================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    configurarPestanas();
+    cargarTodo();
+});
+
+async function cargarTodo() {
+    await Promise.all([
+        renderCategorias(),
+        renderProductos(),
+        renderContactos(),
+        renderPedidos()
+    ]);
+}
+
+/* ==========================================================================
+   CONTROL DE PESTAÑAS (TAB SWITCHING)
+   ========================================================================== */
+function configurarPestanas() {
+    if (!adminTabs) return;
+
+    adminTabs.addEventListener("click", (e) => {
+        const btn = e.target.closest(".nav-link");
+        if (!btn) return;
+
+        // Quitar estado activo de todas las pestañas y ocultar paneles
+        document.querySelectorAll("#adminTabs .nav-link").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("show", "active"));
+
+        // Activar la pestaña y el panel seleccionado
+        btn.classList.add("active");
+        const targetId = btn.getAttribute("data-bs-target");
+        const panel = document.querySelector(targetId);
+        if (panel) panel.classList.add("show", "active");
+    });
+}
+
+/* ==========================================================================
+   1. MÓDULO DE CATEGORÍAS
+   ========================================================================== */
+async function renderCategorias() {
+    if (!tablaCat) return;
+    const categorias = await obtenerCategorias();
+
+    tablaCat.innerHTML = categorias.length === 0 
+        ? `<tr><td colspan="3" class="text-center text-muted py-3">No hay categorías registradas.</td></tr>`
+        : categorias.map(c => `
+            <tr>
+                <td class="fw-bold">${escapeHTML(c.nombre)}</td>
+                <td>${escapeHTML(c.descripcion || '-')}</td>
+                <td class="text-center">
+                    <button data-id="${escapeHTML(c.id)}" class="btn btn-sm btn-danger del-cat">Eliminar</button>
+                </td>
+            </tr>
+        `).join('');
+
+    if (selectCat) {
+        selectCat.innerHTML = '<option value="">Seleccione categoría...</option>' + 
+            categorias.map(c => `<option value="${escapeHTML(c.nombre)}">${escapeHTML(c.nombre)}</option>`).join('');
+    }
+}
+
+if (formCat) {
+    formCat.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        await crearCategoria({
+            nombre: document.getElementById("catNombre").value.trim(),
+            descripcion: document.getElementById("catDescripcion").value.trim()
+        });
+        formCat.reset();
+        await renderCategorias();
+    });
+}
+
+if (tablaCat) {
+    tablaCat.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("del-cat")) {
+            if (confirm("¿Eliminar esta categoría?")) {
+                await eliminarCategoria(e.target.dataset.id);
+                await renderCategorias();
+            }
+        }
+    });
+}
+
+/* ==========================================================================
+   2. MÓDULO DE PRODUCTOS
+   ========================================================================== */
+async function renderProductos() {
+    if (!tablaProd) return;
+    const productos = await obtenerProductos();
+
+    tablaProd.innerHTML = productos.length === 0
+        ? `<tr><td colspan="5" class="text-center text-muted py-3">No hay productos registrados.</td></tr>`
+        : productos.map(p => `
+            <tr>
+                <td><img src="${escapeHTML(p.imagen || 'https://via.placeholder.com/40')}" width="40" height="40" class="rounded object-fit-cover"></td>
+                <td class="fw-bold">${escapeHTML(p.nombre)}</td>
+                <td><span class="badge bg-secondary">${escapeHTML(p.categoria)}</span></td>
+                <td class="text-success fw-bold">S/ ${parseFloat(p.precio).toFixed(2)}</td>
+                <td class="text-center">
+                    <button data-id="${escapeHTML(p.id)}" class="btn btn-sm btn-danger del-prod">Eliminar</button>
+                </td>
+            </tr>
+        `).join('');
+}
+
+if (formProd) {
+    formProd.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        await crearProducto({
+            nombre: document.getElementById("prodNombre").value.trim(),
+            precio: parseFloat(document.getElementById("prodPrecio").value),
+            categoria: selectCat ? selectCat.value : "",
+            imagen: document.getElementById("prodImagen").value.trim()
+        });
+        formProd.reset();
+        await renderProductos();
+    });
+}
+
+if (tablaProd) {
+    tablaProd.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("del-prod")) {
+            if (confirm("¿Eliminar este producto?")) {
+                await eliminarProducto(e.target.dataset.id);
+                await renderProductos();
+            }
+        }
+    });
+}
+
+/* ==========================================================================
+   3. MÓDULO DE MENSAJES DE CLIENTES
+   ========================================================================== */
+async function renderContactos() {
+    if (!tablaMsg) return;
+    const contactos = await obtenerContactos();
+
+    tablaMsg.innerHTML = contactos.length === 0
+        ? `<tr><td colspan="5" class="text-center text-muted py-3">No hay mensajes registrados.</td></tr>`
+        : contactos.map(m => `
+            <tr>
+                <td class="small text-muted">${escapeHTML(m.fecha || '-')}</td>
+                <td class="fw-bold">${escapeHTML(m.nombre)}</td>
+                <td>${escapeHTML(m.correo)}</td>
+                <td>${escapeHTML(m.mensaje)}</td>
+                <td class="text-center">
+                    <button data-id="${escapeHTML(m.id)}" class="btn btn-sm btn-outline-danger del-msg">Eliminar</button>
+                </td>
+            </tr>
+        `).join('');
+}
+
+if (tablaMsg) {
+    tablaMsg.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("del-msg")) {
+            if (confirm("¿Eliminar este mensaje?")) {
+                await eliminarContacto(e.target.dataset.id);
+                await renderContactos();
+            }
+        }
+    });
+}
+
+/* ==========================================================================
+    4. MÓDULO DE PEDIDOS Y REPORTE DE VENTAS
+    ========================================================================== */
+const tablaPedidos = document.getElementById("tablaPedidos");
+const estadosPedido = ["Recibido", "En preparación", "Listo para recojo", "En camino", "Entregado", "Cancelado"];
+
+async function renderPedidos() {
+    if (!tablaPedidos) return;
+    const pedidos = await obtenerPedidos();
+    const totalSolicitado = pedidos.reduce((total, pedido) => total + Number(pedido.total || 0), 0);
+    const pendientes = pedidos.filter(pedido => pedido.pagoEstado === "Pendiente").length;
+
+    document.getElementById("resumenPedidos").textContent = pedidos.length;
+    document.getElementById("resumenIngresos").textContent = `S/ ${totalSolicitado.toFixed(2)}`;
+    document.getElementById("resumenPendientes").textContent = pendientes;
+
+    tablaPedidos.innerHTML = pedidos.length === 0
+        ? '<tr><td colspan="7" class="text-center text-muted py-4">Aún no hay pedidos registrados.</td></tr>'
+        : pedidos.map(pedido => {
+            const productos = (pedido.productos || []).map(item =>
+                `${escapeHTML(item.cantidad)} x ${escapeHTML(item.nombre)}`
+            ).join("<br>");
+            const fecha = pedido.creadoEn ? new Date(pedido.creadoEn).toLocaleString("es-PE") : "-";
+            const estados = estadosPedido.map(estado => `
+                <option value="${escapeHTML(estado)}" ${pedido.estado === estado ? "selected" : ""}>${escapeHTML(estado)}</option>
+            `).join("");
+
+            return `
+                <tr>
+                    <td class="small">${escapeHTML(fecha)}</td>
+                    <td><strong>${escapeHTML(pedido.cliente)}</strong><br><small>${escapeHTML(pedido.telefono)}</small></td>
+                    <td>${escapeHTML(pedido.tipoEntrega)}${pedido.direccion ? `<br><small>${escapeHTML(pedido.direccion)}, ${escapeHTML(pedido.distrito)}</small>` : ""}</td>
+                    <td>${productos}</td>
+                    <td class="fw-bold text-success">S/ ${Number(pedido.total || 0).toFixed(2)}</td>
+                    <td>${escapeHTML(pedido.metodoPago)}<br><small class="text-muted">${escapeHTML(pedido.pagoEstado)}</small></td>
+                    <td>
+                        <select class="form-select form-select-sm estado-pedido" data-id="${escapeHTML(pedido.id)}" aria-label="Estado del pedido">
+                            ${estados}
+                        </select>
+                    </td>
+                </tr>`;
+        }).join("");
+}
+
+if (tablaPedidos) {
+    tablaPedidos.addEventListener("change", async event => {
+        const selector = event.target.closest(".estado-pedido");
+        if (!selector) return;
+        try {
+            await actualizarEstadoPedido(selector.dataset.id, selector.value);
+        } catch (error) {
+            console.error("No se pudo actualizar el pedido:", error);
+            alert("No se pudo actualizar el estado del pedido.");
+            await renderPedidos();
+        }
+    });
+}
+</file>
+
+<file path="src/js/main.js">
+import { Header } from "./components/Header.js";
+import { Footer } from "./components/Footer.js";
+import { HomeView } from "./views/HomeView.js";
+import { ProductsView } from "./views/ProductsView.js";
+import { ProductDetailView } from "./views/ProductDetailView.js";
+import { cartService } from "./services/cartService.js";
+
+function actualizarContadorCarrito() {
+    const { totalItems } = cartService.getTotals();
+    document.querySelectorAll("[data-cart-count]").forEach(badge => {
+        badge.textContent = totalItems;
+    });
+}
+
+async function renderApp() {
+    const app = document.getElementById("app");
+    if (!app) return;
+
+    const path = window.location.pathname;
+
+    let viewHTML = "";
+
+    if (path.includes("productos.html")) {
+        viewHTML = await ProductsView();
+    } else if (path.includes("producto.html")) {
+        viewHTML = await ProductDetailView();
+    } else {
+        // Por defecto: Página de Inicio (index.html)
+        viewHTML = await HomeView();
+    }
+
+    app.innerHTML = `
+    ${Header()}
+    <main>${viewHTML}</main>
+    ${Footer()}
+`;
+    actualizarContadorCarrito();
+}
+
+document.addEventListener("DOMContentLoaded", renderApp);
+window.addEventListener("bonanza:cart-updated", actualizarContadorCarrito);
+</file>
+
+<file path="src/pages/producto.html">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Producto | Lácteos Bonanza</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-light">
+
+    <div id="app"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/main.js"></script>
+</body>
+</html>
+</file>
+
+<file path="src/pages/productos.html">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo | Lácteos Bonanza</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-light">
+
+    <div id="app"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/main.js"></script>
+</body>
+</html>
+</file>
+
+<file path="src/js/components/ProductCard.js">
+import { formatCurrency } from "../utils/formatCurrency.js";
+import { escapeHTML } from "../utils/escapeHTML.js";
+
+export function ProductCard(producto, rutaBase = "") {
+    const imagen = escapeHTML(producto.imagen || "https://via.placeholder.com/300x200?text=Lacteo+Bonanza");
+    
+    return `
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="${imagen}" class="card-img-top object-fit-cover" alt="${escapeHTML(producto.nombre)}" style="height: 180px;">
+                <div class="card-body d-flex flex-column">
+                    <span class="badge bg-light text-success align-self-start mb-2">${escapeHTML(producto.categoria)}</span>
+                    <h6 class="card-title text-dark mb-1">${escapeHTML(producto.nombre)}</h6>
+                    <p class="text-success fw-bold fs-5 mb-3">${formatCurrency(producto.precio)}</p>
+                    <div class="d-grid gap-2 mt-auto">
+                        <a href="${rutaBase}producto.html?id=${escapeHTML(producto.id)}" class="btn btn-outline-success btn-sm">
+                            Ver detalle
+                        </a>
+                        <button type="button" class="btn btn-success btn-sm btn-agregar-carrito"
+                            data-producto-id="${escapeHTML(producto.id)}">
+                            <i class="bi bi-cart-plus me-1"></i>Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+</file>
+
+<file path="src/js/utils/constants.js">
+export const COLECCIONES = {
+    CATEGORIAS: "categorias",
+    PRODUCTOS: "productos",
+    CONTACTOS: "contactos",
+    PEDIDOS: "pedidos"
+};
+</file>
+
+<file path="src/js/views/ProductDetailView.js">
+import { obtenerProductoPorId } from "../services/productService.js";
+import { formatCurrency } from "../utils/formatCurrency.js";
+import { escapeHTML } from "../utils/escapeHTML.js";
+import { cartService } from "../services/cartService.js";
+
+export async function ProductDetailView() {
+    // Obtener ID desde la URL (?id=XYZ)
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id");
+
+    if (!id) {
+        return `
+            <div class="container my-5 text-center py-5">
+                <h4>Producto no encontrado.</h4>
+                <a href="productos.html" class="btn btn-success mt-3">Volver al catálogo</a>
+            </div>
+        `;
+    }
+
+    const producto = await obtenerProductoPorId(id);
+
+    if (!producto) {
+        return `
+            <div class="container my-5 text-center py-5">
+                <h4>El producto solicitado no existe.</h4>
+                <a href="productos.html" class="btn btn-success mt-3">Volver al catálogo</a>
+            </div>
+        `;
+    }
+
+    setTimeout(() => {
+        const button = document.getElementById("btnAgregarDetalle");
+        button?.addEventListener("click", () => {
+            cartService.addItem(producto);
+            button.innerHTML = '<i class="bi bi-check2 me-1"></i>Agregado al carrito';
+        });
+    }, 0);
+
+    return `
+        <div class="container my-5">
+            <a href="productos.html" class="btn btn-outline-secondary btn-sm mb-4">← Volver al catálogo</a>
+            <div class="card shadow border-0 overflow-hidden">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="${escapeHTML(producto.imagen || 'https://via.placeholder.com/500')}" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 300px;" alt="${escapeHTML(producto.nombre)}">
+                    </div>
+                    <div class="col-md-6 p-4 p-md-5 d-flex flex-column justify-content-center">
+                        <span class="badge bg-success align-self-start mb-2">${escapeHTML(producto.categoria)}</span>
+                        <h2 class="fw-bold text-dark">${escapeHTML(producto.nombre)}</h2>
+                        <h3 class="text-success fw-bold my-3">${formatCurrency(producto.precio)}</h3>
+                        <p class="text-muted mb-4">${escapeHTML(producto.descripcion || 'Producto lácteo de alta calidad, elaborado con estándares artesanales para garantizar máxima frescura.')}</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="button" class="btn btn-success btn-lg fw-bold" id="btnAgregarDetalle">
+                                <i class="bi bi-cart-plus me-1"></i>Agregar al carrito
+                            </button>
+                            <a href="carrito.html" class="btn btn-outline-secondary btn-lg">Ir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+</file>
+
+<file path="src/js/views/ProductsView.js">
+import { obtenerCategorias } from "../services/categoryService.js";
+import { obtenerProductos } from "../services/productService.js";
+import { ProductGrid } from "../components/ProductGrid.js";
+import { escapeHTML } from "../utils/escapeHTML.js";
+import { cartService } from "../services/cartService.js";
+
+export async function ProductsView() {
+    const categorias = await obtenerCategorias();
+    const productos = await obtenerProductos();
+
+    const html = `
+        <div class="container my-5">
+            <h2 class="fw-bold text-success text-center mb-4">Catálogo de Productos Lácteos</h2>
+            
+            <!-- Filtros de Categorías -->
+            <div class="d-flex justify-content-center gap-2 flex-wrap mb-4" id="contenedorFiltros">
+                <button class="btn btn-success btn-filtro active" data-categoria="todas">Todos</button>
+                ${categorias.map(cat => `
+                    <button class="btn btn-outline-success btn-filtro" data-categoria="${escapeHTML(cat.nombre)}">
+                        ${escapeHTML(cat.nombre)}
+                    </button>
+                `).join('')}
+            </div>
+
+            <!-- Grilla de Productos -->
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="contenedorProductos">
+                ${ProductGrid(productos, "./")}
+            </div>
+        </div>
+    `;
+
+    // Eventos de Filtrado
+    setTimeout(() => {
+        const contenedorFiltros = document.getElementById("contenedorFiltros");
+        const contenedorProductos = document.getElementById("contenedorProductos");
+
+        if (contenedorFiltros) {
+            contenedorFiltros.addEventListener("click", (e) => {
+                if (!e.target.classList.contains("btn-filtro")) return;
+
+                document.querySelectorAll(".btn-filtro").forEach(b => {
+                    b.classList.remove("active", "btn-success");
+                    b.classList.add("btn-outline-success");
+                });
+                e.target.classList.add("active", "btn-success");
+
+                const cat = e.target.dataset.categoria;
+                if (cat === "todas") {
+                    contenedorProductos.innerHTML = ProductGrid(productos, "./");
+                } else {
+                    const filtrados = productos.filter(p => p.categoria === cat);
+                    contenedorProductos.innerHTML = ProductGrid(filtrados, "./");
+                }
+            });
+        }
+
+        if (contenedorProductos) {
+            contenedorProductos.addEventListener("click", (e) => {
+                const button = e.target.closest(".btn-agregar-carrito");
+                if (!button) return;
+                const producto = productos.find(item => item.id === button.dataset.productoId);
+                if (!producto) return;
+                cartService.addItem(producto);
+                const original = button.innerHTML;
+                button.innerHTML = '<i class="bi bi-check2 me-1"></i>Agregado';
+                button.disabled = true;
+                window.setTimeout(() => {
+                    button.innerHTML = original;
+                    button.disabled = false;
+                }, 900);
+            });
+        }
+    }, 0);
+
+    return html;
+}
+</file>
+
+<file path="index.html">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lácteos Bonanza | Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./src/css/styles.css">
+</head>
+<body class="bg-light">
+
+    <div id="app"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./src/js/main.js"></script>
+</body>
+</html>
+</file>
+
+</files>
