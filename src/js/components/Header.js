@@ -6,7 +6,10 @@ export function Header() {
     return `
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
             <div class="container">
-                <a class="navbar-brand fw-bold fs-4" href="${base}index.html"><img hrelf="./src/ase" >Lácteos Bonanza</a>
+                <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="${base}index.html">
+                    <img src="${base}img/logo.png" alt="" width="40" height="40" class="me-2">
+                    Lácteos Bonanza
+                </a>
                 <div class="collapse navbar-collapse show" id="navMenu">
                     <ul class="navbar-nav ms-auto align-items-center">
                         <li class="nav-item"><a class="nav-link fw-bold" href="${base}index.html">Inicio</a></li>

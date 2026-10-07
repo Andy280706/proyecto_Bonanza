@@ -2,6 +2,8 @@ import { cartService } from '../services/cartService.js';
 import { crearPedido } from '../services/orderService.js';
 import { formatCurrency } from '../utils/formatCurrency.js';
 import { escapeHTML } from '../utils/escapeHTML.js';
+import { Header } from "../components/Header.js";
+import { Footer } from "../components/Footer.js";
 
 export class CartView {
     constructor() {
@@ -12,7 +14,7 @@ export class CartView {
         if (!this.app) return;
         
         // 1. Renderizar estructura base completa (con su propio Header)
-        this.app.innerHTML = this.getTemplate();
+        this.app.innerHTML = `${Header()}${this.getTemplate()}${Footer()}`;
 
         // 2. Guardar referencias del DOM
         this.contenedor = document.getElementById("contenedorDetalleCarrito");
@@ -32,22 +34,6 @@ export class CartView {
 
     getTemplate() {
         return `
-            <!-- Header Propio del Carrito -->
-            <header class="bg-white shadow-sm mb-4">
-                <nav class="navbar navbar-expand-lg navbar-light container">
-                    <div class="container-fluid">
-                        <a class="navbar-brand fw-bold text-success" href="../../index.html">
-                            <i class="bi bi-shop me-2"></i>BONANZA
-                        </a>
-                        <div class="d-flex">
-                            <a href="productos.html" class="btn btn-outline-secondary btn-sm">
-                                <i class="bi bi-arrow-left me-1"></i> Seguir comprando
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </header>
-
             <main class="container my-4">
                 <h2 class="mb-4 fw-bold"><i class="bi bi-cart3 me-2"></i>Tu carrito</h2>
                 <div id="checkoutFeedback" class="mb-3" aria-live="polite"></div>
@@ -112,7 +98,7 @@ export class CartView {
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="telefonoCliente" class="form-label">Teléfono / WhatsApp</label>
-                                        <input type="tel" class="form-control" id="telefonoCliente" name="telefonoCliente" placeholder="987654321" required>
+                                        <input type="tel" class="form-control" id="telefonoCliente" name="telefonoCliente" placeholder="987654321" inputmode="numeric" minlength="9" maxlength="9" pattern="[0-9]{9}" title="Ingresa un número de 9 dígitos" required>
                                     </div>
                                 </div>
                                 <h6 class="text-secondary border-bottom pb-2 mb-3 mt-2 fw-bold">Entrega</h6>
@@ -181,7 +167,7 @@ export class CartView {
         this.contenedor.innerHTML = cart.map((item, index) => {
             const imagenSrc = escapeHTML(item.imagen || item.imagenUrl || item.image || '');
             const imagenHTML = imagenSrc 
-                ? `<img src="${imagenSrc}" alt="${escapeHTML(item.nombre)}" class="img-fluid rounded" style="max-height: 100%; max-width: 100%; object-fit: contain;">`
+                ? `<img src="${imagenSrc}" alt="${escapeHTML(item.nombre)}" class="img-fluid rounded" style="max-height: 100%; max-width: 100%; object-fit: contain;" onerror="this.onerror=null;this.src='/img/logo.png';">`
                 : `<i class="bi bi-box-seam text-secondary fs-3"></i>`;
 
             const precioFormateado = formatCurrency ? formatCurrency(item.precio) : `S/. ${Number(item.precio).toFixed(2)}`;
@@ -251,6 +237,8 @@ export class CartView {
         if (this.formCheckout) {
             this.tipoEntrega?.addEventListener("change", () => this.actualizarCamposEntrega());
             this.actualizarCamposEntrega();
+            const telefonoInput = document.getElementById("telefonoCliente");
+            telefonoInput?.addEventListener("input", () => telefonoInput.setCustomValidity(""));
 
             this.formCheckout.addEventListener("submit", async (e) => {
                 e.preventDefault();
@@ -258,10 +246,17 @@ export class CartView {
                 if (cart.length === 0) return;
 
                 const formData = new FormData(this.formCheckout);
+                const telefono = String(formData.get("telefonoCliente")).trim();
+                if (!/^\d{9}$/.test(telefono)) {
+                    telefonoInput?.setCustomValidity("Ingresa un teléfono de exactamente 9 dígitos.");
+                    telefonoInput?.reportValidity();
+                    return;
+                }
+                telefonoInput?.setCustomValidity("");
                 const metodoPago = formData.get("metodoPago");
                 const pedido = {
                     cliente: String(formData.get("nombreCliente")).trim(),
-                    telefono: String(formData.get("telefonoCliente")).trim(),
+                    telefono,
                     tipoEntrega: String(formData.get("tipoEntrega")),
                     distrito: String(formData.get("distrito") || "").trim(),
                     direccion: String(formData.get("direccion") || "").trim(),

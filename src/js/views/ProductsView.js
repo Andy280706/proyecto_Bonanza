@@ -3,6 +3,7 @@ import { obtenerProductos } from "../services/productService.js";
 import { ProductGrid } from "../components/ProductGrid.js";
 import { escapeHTML } from "../utils/escapeHTML.js";
 import { cartService } from "../services/cartService.js";
+import { mostrarToast } from "../utils/mostrarToast.js";
 
 export async function ProductsView() {
     const categorias = await obtenerCategorias();
@@ -61,6 +62,7 @@ export async function ProductsView() {
                 const producto = productos.find(item => item.id === button.dataset.productoId);
                 if (!producto) return;
                 cartService.addItem(producto);
+                mostrarToast(`${producto.nombre} se agregó al carrito.`);
                 const original = button.innerHTML;
                 button.innerHTML = '<i class="bi bi-check2 me-1"></i>Agregado';
                 button.disabled = true;

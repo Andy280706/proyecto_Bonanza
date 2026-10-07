@@ -6,19 +6,15 @@
     <title>Administración | Lácteos Bonanza</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./src/css/styles.css">
 </head>
 <body class="bg-light">
 
-    <!-- Barra Superior -->
-    <nav class="navbar navbar-dark bg-dark mb-4 shadow">
-        <div class="container">
-            <span class="navbar-brand fw-bold">🥛 Lácteos Bonanza - Panel Admin</span>
-            <a href="index.html" class="btn btn-outline-light btn-sm">Ir a la Tienda 🛒</a>
-        </div>
-    </nav>
+    <div id="siteHeader"></div>
 
     <div class="container my-4">
+        <div id="adminFeedback" aria-live="polite"></div>
         <!-- Pestañas de Navegación -->
         <ul class="nav nav-tabs fw-bold mb-4" id="adminTabs" role="tablist">
             <li class="nav-item" role="presentation">
@@ -75,7 +71,9 @@
                                             <th class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tablaCategorias"></tbody>
+                                    <tbody id="tablaCategorias">
+                                        <tr><td colspan="3" class="text-center py-3"><span class="spinner-border spinner-border-sm text-success" role="status"></span> Cargando categorías...</td></tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -96,7 +94,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="prodPrecio" class="form-label fw-bold">Precio (S/)</label>
-                                <input type="number" step="0.01" id="prodPrecio" class="form-control" placeholder="Ej: 18.00" required>
+                                <input type="number" min="0.01" step="0.01" id="prodPrecio" class="form-control" placeholder="Ej: 18.00" required>
                             </div>
                             <div class="mb-3">
                                 <label for="prodCategoria" class="form-label fw-bold">Categoría</label>
@@ -124,7 +122,9 @@
                                             <th class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tablaProductos"></tbody>
+                                    <tbody id="tablaProductos">
+                                        <tr><td colspan="5" class="text-center py-3"><span class="spinner-border spinner-border-sm text-success" role="status"></span> Cargando productos...</td></tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -146,7 +146,9 @@
                                     <th class="text-center">Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody id="tablaContactos"></tbody>
+                            <tbody id="tablaContactos">
+                                <tr><td colspan="5" class="text-center py-3"><span class="spinner-border spinner-border-sm text-success" role="status"></span> Cargando mensajes...</td></tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -189,8 +191,26 @@
                                     <th>Estado</th>
                                 </tr>
                             </thead>
-                            <tbody id="tablaPedidos"></tbody>
+                            <tbody id="tablaPedidos">
+                                <tr><td colspan="7" class="text-center py-3"><span class="spinner-border spinner-border-sm text-success" role="status"></span> Cargando pedidos...</td></tr>
+                            </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalConfirmarEliminar" tabindex="-1" aria-labelledby="modalConfirmarEliminarLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalConfirmarEliminarLabel">Confirmar eliminación</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body" id="textoConfirmarEliminar">¿Deseas eliminar este elemento?</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">Eliminar</button>
+                        </div>
                     </div>
                 </div>
             </div>
