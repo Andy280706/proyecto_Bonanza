@@ -36,7 +36,7 @@ export class CartView {
             <header class="bg-white shadow-sm mb-4">
                 <nav class="navbar navbar-expand-lg navbar-light container">
                     <div class="container-fluid">
-                        <a class="navbar-brand fw-bold text-success" href="../index.html">
+                        <a class="navbar-brand fw-bold text-success" href="../../index.html">
                             <i class="bi bi-shop me-2"></i>BONANZA
                         </a>
                         <div class="d-flex">
