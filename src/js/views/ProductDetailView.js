@@ -2,6 +2,7 @@ import { obtenerProductoPorId } from "../services/productService.js";
 import { formatCurrency } from "../utils/formatCurrency.js";
 import { escapeHTML } from "../utils/escapeHTML.js";
 import { cartService } from "../services/cartService.js";
+import { mostrarToast } from "../utils/mostrarToast.js";
 
 export async function ProductDetailView() {
     // Obtener ID desde la URL (?id=XYZ)
@@ -33,6 +34,7 @@ export async function ProductDetailView() {
         button?.addEventListener("click", () => {
             cartService.addItem(producto);
             button.innerHTML = '<i class="bi bi-check2 me-1"></i>Agregado al carrito';
+            mostrarToast(`${producto.nombre} se agregó al carrito.`);
         });
     }, 0);
 
@@ -42,7 +44,7 @@ export async function ProductDetailView() {
             <div class="card shadow border-0 overflow-hidden">
                 <div class="row g-0">
                     <div class="col-md-6">
-                        <img src="${escapeHTML(producto.imagen || 'https://via.placeholder.com/500')}" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 300px;" alt="${escapeHTML(producto.nombre)}">
+                        <img src="${escapeHTML(producto.imagen || 'https://via.placeholder.com/500')}" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 300px;" alt="${escapeHTML(producto.nombre)}" onerror="this.onerror=null;this.src='/img/logo.png';">
                     </div>
                     <div class="col-md-6 p-4 p-md-5 d-flex flex-column justify-content-center">
                         <span class="badge bg-success align-self-start mb-2">${escapeHTML(producto.categoria)}</span>

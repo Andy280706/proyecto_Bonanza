@@ -17,24 +17,38 @@ async function renderApp() {
     if (!app) return;
 
     const path = window.location.pathname;
-
-    let viewHTML = "";
-
-    if (path.includes("productos.html")) {
-        viewHTML = await ProductsView();
-    } else if (path.includes("producto.html")) {
-        viewHTML = await ProductDetailView();
-    } else {
-        // Por defecto: Página de Inicio (index.html)
-        viewHTML = await HomeView();
-    }
-
     app.innerHTML = `
-    ${Header()}
-    <main>${viewHTML}</main>
-    ${Footer()}
-`;
+        ${Header()}
+        <main>
+            <div class="container text-center py-5" role="status" aria-live="polite">
+                <div class="spinner-border text-success" aria-hidden="true"></div>
+                <p class="mt-2 mb-0">Cargando datos...</p>
+            </div>
+        </main>
+        ${Footer()}
+    `;
     actualizarContadorCarrito();
+
+    try {
+        let viewHTML = "";
+
+        if (path.includes("productos.html")) {
+            viewHTML = await ProductsView();
+        } else if (path.includes("producto.html")) {
+            viewHTML = await ProductDetailView();
+        } else {
+            viewHTML = await HomeView();
+        }
+
+        app.querySelector("main").innerHTML = viewHTML;
+    } catch (error) {
+        console.error("No se pudo cargar la página:", error);
+        app.querySelector("main").innerHTML = `
+            <div class="container my-5">
+                <div class="alert alert-danger" role="alert">No se pudieron cargar los datos. Inténtalo de nuevo más tarde.</div>
+            </div>
+        `;
+    }
 }
 
 document.addEventListener("DOMContentLoaded", renderApp);

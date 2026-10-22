@@ -3,6 +3,7 @@ import { obtenerProductos, crearProducto, eliminarProducto } from "./services/pr
 import { obtenerContactos, eliminarContacto } from "./services/contactService.js";
 import { obtenerPedidos, actualizarEstadoPedido } from "./services/orderService.js";
 import { escapeHTML } from "./utils/escapeHTML.js";
+import { Header } from "./components/Header.js";
 
 /* ==========================================================================
    ELEMENTOS DEL DOM
@@ -20,6 +21,44 @@ const tablaProd = document.getElementById("tablaProductos");
 
 // Mensajes
 const tablaMsg = document.getElementById("tablaContactos");
+const adminFeedback = document.getElementById("adminFeedback");
+const siteHeader = document.getElementById("siteHeader");
+
+if (siteHeader) siteHeader.innerHTML = Header();
+
+function mostrarError(mensaje) {
+    if (adminFeedback) {
+        adminFeedback.innerHTML = `<div class="alert alert-danger" role="alert">${escapeHTML(mensaje)}</div>`;
+    }
+}
+
+function mostrarCarga(tabla, columnas, mensaje) {
+    tabla.innerHTML = `<tr><td colspan="${columnas}" class="text-center py-3"><span class="spinner-border spinner-border-sm text-success" role="status"></span> ${mensaje}</td></tr>`;
+}
+
+let accionPendiente = null;
+const modalConfirmarEliminar = document.getElementById("modalConfirmarEliminar");
+const textoConfirmarEliminar = document.getElementById("textoConfirmarEliminar");
+
+function solicitarConfirmacion(mensaje, accion) {
+    accionPendiente = accion;
+    textoConfirmarEliminar.textContent = mensaje;
+    window.bootstrap.Modal.getOrCreateInstance(modalConfirmarEliminar).show();
+}
+
+document.getElementById("btnConfirmarEliminar")?.addEventListener("click", async () => {
+    const accion = accionPendiente;
+    accionPendiente = null;
+    if (!accion) return;
+
+    window.bootstrap.Modal.getOrCreateInstance(modalConfirmarEliminar).hide();
+    try {
+        await accion();
+    } catch (error) {
+        console.error("No se pudo eliminar el elemento:", error);
+        mostrarError("No se pudo eliminar el elemento. Inténtalo nuevamente.");
+    }
+});
 
 /* ==========================================================================
    INICIALIZACIÓN
@@ -30,12 +69,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function cargarTodo() {
-    await Promise.all([
-        renderCategorias(),
-        renderProductos(),
-        renderContactos(),
-        renderPedidos()
-    ]);
+    try {
+        await Promise.all([
+            renderCategorias(),
+            renderProductos(),
+            renderContactos(),
+            renderPedidos()
+        ]);
+    } catch (error) {
+        console.error("No se pudieron cargar los datos de administración:", error);
+        mostrarError("No se pudieron cargar algunos datos. Inténtalo nuevamente.");
+    }
 }
 
 /* ==========================================================================
@@ -65,6 +109,7 @@ function configurarPestanas() {
    ========================================================================== */
 async function renderCategorias() {
     if (!tablaCat) return;
+    mostrarCarga(tablaCat, 3, "Cargando categorías...");
     const categorias = await obtenerCategorias();
 
     tablaCat.innerHTML = categorias.length === 0 
@@ -88,22 +133,28 @@ async function renderCategorias() {
 if (formCat) {
     formCat.addEventListener("submit", async (e) => {
         e.preventDefault();
-        await crearCategoria({
-            nombre: document.getElementById("catNombre").value.trim(),
-            descripcion: document.getElementById("catDescripcion").value.trim()
-        });
-        formCat.reset();
-        await renderCategorias();
+        try {
+            await crearCategoria({
+                nombre: document.getElementById("catNombre").value.trim(),
+                descripcion: document.getElementById("catDescripcion").value.trim()
+            });
+            formCat.reset();
+            await renderCategorias();
+        } catch (error) {
+            console.error("No se pudo guardar la categoría:", error);
+            mostrarError("No se pudo guardar la categoría. Inténtalo nuevamente.");
+        }
     });
 }
 
 if (tablaCat) {
     tablaCat.addEventListener("click", async (e) => {
-        if (e.target.classList.contains("del-cat")) {
-            if (confirm("¿Eliminar esta categoría?")) {
-                await eliminarCategoria(e.target.dataset.id);
+        const boton = e.target.closest(".del-cat");
+        if (boton) {
+            solicitarConfirmacion("¿Eliminar esta categoría?", async () => {
+                await eliminarCategoria(boton.dataset.id);
                 await renderCategorias();
-            }
+            });
         }
     });
 }
@@ -113,13 +164,14 @@ if (tablaCat) {
    ========================================================================== */
 async function renderProductos() {
     if (!tablaProd) return;
+    mostrarCarga(tablaProd, 5, "Cargando productos...");
     const productos = await obtenerProductos();
 
     tablaProd.innerHTML = productos.length === 0
         ? `<tr><td colspan="5" class="text-center text-muted py-3">No hay productos registrados.</td></tr>`
         : productos.map(p => `
             <tr>
-                <td><img src="${escapeHTML(p.imagen || 'https://via.placeholder.com/40')}" width="40" height="40" class="rounded object-fit-cover"></td>
+                <td><img src="${escapeHTML(p.imagen || 'https://via.placeholder.com/40')}" width="40" height="40" class="rounded object-fit-cover" alt="${escapeHTML(p.nombre)}" onerror="this.onerror=null;this.src='/img/logo.png';"></td>
                 <td class="fw-bold">${escapeHTML(p.nombre)}</td>
                 <td><span class="badge bg-secondary">${escapeHTML(p.categoria)}</span></td>
                 <td class="text-success fw-bold">S/ ${parseFloat(p.precio).toFixed(2)}</td>
@@ -133,24 +185,40 @@ async function renderProductos() {
 if (formProd) {
     formProd.addEventListener("submit", async (e) => {
         e.preventDefault();
-        await crearProducto({
-            nombre: document.getElementById("prodNombre").value.trim(),
-            precio: parseFloat(document.getElementById("prodPrecio").value),
-            categoria: selectCat ? selectCat.value : "",
-            imagen: document.getElementById("prodImagen").value.trim()
-        });
-        formProd.reset();
-        await renderProductos();
+        const inputPrecio = document.getElementById("prodPrecio");
+        const precio = Number(inputPrecio.value);
+        if (!Number.isFinite(precio) || precio <= 0) {
+            inputPrecio.setCustomValidity("El precio debe ser un número mayor que 0.");
+            inputPrecio.reportValidity();
+            return;
+        }
+        inputPrecio.setCustomValidity("");
+
+        try {
+            await crearProducto({
+                nombre: document.getElementById("prodNombre").value.trim(),
+                precio,
+                categoria: selectCat ? selectCat.value : "",
+                imagen: document.getElementById("prodImagen").value.trim()
+            });
+            formProd.reset();
+            await renderProductos();
+        } catch (error) {
+            console.error("No se pudo guardar el producto:", error);
+            mostrarError("No se pudo guardar el producto. Inténtalo nuevamente.");
+        }
     });
+    document.getElementById("prodPrecio").addEventListener("input", (e) => e.target.setCustomValidity(""));
 }
 
 if (tablaProd) {
     tablaProd.addEventListener("click", async (e) => {
-        if (e.target.classList.contains("del-prod")) {
-            if (confirm("¿Eliminar este producto?")) {
-                await eliminarProducto(e.target.dataset.id);
+        const boton = e.target.closest(".del-prod");
+        if (boton) {
+            solicitarConfirmacion("¿Eliminar este producto?", async () => {
+                await eliminarProducto(boton.dataset.id);
                 await renderProductos();
-            }
+            });
         }
     });
 }
@@ -160,6 +228,7 @@ if (tablaProd) {
    ========================================================================== */
 async function renderContactos() {
     if (!tablaMsg) return;
+    mostrarCarga(tablaMsg, 5, "Cargando mensajes...");
     const contactos = await obtenerContactos();
 
     tablaMsg.innerHTML = contactos.length === 0
@@ -179,11 +248,12 @@ async function renderContactos() {
 
 if (tablaMsg) {
     tablaMsg.addEventListener("click", async (e) => {
-        if (e.target.classList.contains("del-msg")) {
-            if (confirm("¿Eliminar este mensaje?")) {
-                await eliminarContacto(e.target.dataset.id);
+        const boton = e.target.closest(".del-msg");
+        if (boton) {
+            solicitarConfirmacion("¿Eliminar este mensaje?", async () => {
+                await eliminarContacto(boton.dataset.id);
                 await renderContactos();
-            }
+            });
         }
     });
 }
@@ -196,6 +266,7 @@ const estadosPedido = ["Recibido", "En preparación", "Listo para recojo", "En c
 
 async function renderPedidos() {
     if (!tablaPedidos) return;
+    mostrarCarga(tablaPedidos, 7, "Cargando pedidos...");
     const pedidos = await obtenerPedidos();
     const totalSolicitado = pedidos.reduce((total, pedido) => total + Number(pedido.total || 0), 0);
     const pendientes = pedidos.filter(pedido => pedido.pagoEstado === "Pendiente").length;
@@ -240,8 +311,12 @@ if (tablaPedidos) {
             await actualizarEstadoPedido(selector.dataset.id, selector.value);
         } catch (error) {
             console.error("No se pudo actualizar el pedido:", error);
-            alert("No se pudo actualizar el estado del pedido.");
-            await renderPedidos();
+            mostrarError("No se pudo actualizar el estado del pedido.");
+            try {
+                await renderPedidos();
+            } catch (renderError) {
+                console.error("No se pudo volver a cargar la lista de pedidos:", renderError);
+            }
         }
     });
 }
