@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main class="auth-page">
+        <form id="registro-form" class="auth-card">
+            <h1>Crear cuenta</h1>
+            <label>Nombre<input id="nombre" required></label>
+            <label>Correo<input id="email" type="email" required></label>
+            <label>Contraseña<input id="password" type="password" minlength="6" required></label>
+            <label>Confirmar contraseña<input id="confirmar" type="password" minlength="6" required></label>
+            <button class="btn" type="submit">Crear cuenta</button>
+            <div id="mensaje"></div>
+            <p>¿Ya tienes cuenta? <a href="./login.html">Iniciar sesión</a></p>
+        </form>
+    </main>
+    <script type="module" src="./js/auth/registro.js"></script>
+</body>
+</html>
