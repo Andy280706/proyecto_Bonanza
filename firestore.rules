@@ -1,0 +1,48 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.rol == "admin";
+    }
+
+    match /usuarios/{userId} {
+      allow create: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.rol == "cliente";
+      allow read: if signedIn() && request.auth.uid == userId;
+      allow update: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.rol == resource.data.rol;
+      allow delete: if signedIn() && request.auth.uid == userId;
+    }
+
+    match /productos/{productId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /pedidos/{orderId} {
+      allow create: if isAdmin()
+        || (signedIn() && request.resource.data.usuarioId == request.auth.uid);
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.usuarioId == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+
+    match /categorias/{categoryId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /contactos/{contactId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

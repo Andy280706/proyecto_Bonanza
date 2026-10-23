@@ -2,8 +2,10 @@ import { cartService } from '../services/cartService.js';
 import { crearPedido } from '../services/orderService.js';
 import { formatCurrency } from '../utils/formatCurrency.js';
 import { escapeHTML } from '../utils/escapeHTML.js';
-import { Header } from "../components/Header.js";
+import { Header, inicializarHeaderAuth } from "../components/Header.js";
 import { Footer } from "../components/Footer.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { auth } from "../firebase/config.js";
 
 export class CartView {
     constructor() {
@@ -15,6 +17,10 @@ export class CartView {
         
         // 1. Renderizar estructura base completa (con su propio Header)
         this.app.innerHTML = `${Header()}${this.getTemplate()}${Footer()}`;
+        inicializarHeaderAuth();
+        this.authReady = new Promise(resolve => {
+            onAuthStateChanged(auth, () => resolve());
+        });
 
         // 2. Guardar referencias del DOM
         this.contenedor = document.getElementById("contenedorDetalleCarrito");
@@ -158,8 +164,8 @@ export class CartView {
                     <p class="mt-2">Tu carrito está vacío actualmente.</p>
                 </div>`;
             if (this.txtCant) this.txtCant.innerText = "Productos (0)";
-            if (this.subtotalLabel) this.subtotalLabel.innerText = formatCurrency ? formatCurrency(0) : "S/. 0.00";
-            if (this.totalLabel) this.totalLabel.innerText = formatCurrency ? formatCurrency(0) : "S/. 0.00";
+            if (this.subtotalLabel) this.subtotalLabel.innerText = formatCurrency(0);
+            if (this.totalLabel) this.totalLabel.innerText = formatCurrency(0);
             if (this.checkoutButton) this.checkoutButton.disabled = true;
             return;
         }
@@ -170,7 +176,7 @@ export class CartView {
                 ? `<img src="${imagenSrc}" alt="${escapeHTML(item.nombre)}" class="img-fluid rounded" style="max-height: 100%; max-width: 100%; object-fit: contain;" onerror="this.onerror=null;this.src='/img/logo.png';">`
                 : `<i class="bi bi-box-seam text-secondary fs-3"></i>`;
 
-            const precioFormateado = formatCurrency ? formatCurrency(item.precio) : `S/. ${Number(item.precio).toFixed(2)}`;
+            const precioFormateado = formatCurrency(item.precio);
 
             return `
                 <div class="row align-items-center mb-4 border-bottom pb-4">
@@ -207,7 +213,7 @@ export class CartView {
         }).join('');
 
         if (this.txtCant) this.txtCant.innerText = `Productos (${totalItems})`;
-        const totalFormateado = formatCurrency ? formatCurrency(totalDinero) : `S/. ${totalDinero.toFixed(2)}`;
+        const totalFormateado = formatCurrency(totalDinero);
         if (this.subtotalLabel) this.subtotalLabel.innerText = totalFormateado;
         if (this.totalLabel) this.totalLabel.innerText = totalFormateado;
         if (this.checkoutButton) this.checkoutButton.disabled = false;
@@ -244,6 +250,13 @@ export class CartView {
                 e.preventDefault();
                 const cart = cartService.getCart();
                 if (cart.length === 0) return;
+                await this.authReady;
+                const user = auth.currentUser;
+                if (!user) {
+                    alert("Debes iniciar sesión para finalizar tu compra");
+                    window.location.href = "./login.html";
+                    return;
+                }
 
                 const formData = new FormData(this.formCheckout);
                 const telefono = String(formData.get("telefonoCliente")).trim();
@@ -255,6 +268,7 @@ export class CartView {
                 telefonoInput?.setCustomValidity("");
                 const metodoPago = formData.get("metodoPago");
                 const pedido = {
+                    usuarioId: user.uid,
                     cliente: String(formData.get("nombreCliente")).trim(),
                     telefono,
                     tipoEntrega: String(formData.get("tipoEntrega")),

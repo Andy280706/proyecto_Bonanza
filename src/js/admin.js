@@ -3,7 +3,10 @@ import { obtenerProductos, crearProducto, eliminarProducto } from "./services/pr
 import { obtenerContactos, eliminarContacto } from "./services/contactService.js";
 import { obtenerPedidos, actualizarEstadoPedido } from "./services/orderService.js";
 import { escapeHTML } from "./utils/escapeHTML.js";
-import { Header } from "./components/Header.js";
+import { Header, inicializarHeaderAuth } from "./components/Header.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { auth } from "./firebase/config.js";
+import { obtenerPerfilUsuario } from "./services/authService.js";
 
 /* ==========================================================================
    ELEMENTOS DEL DOM
@@ -24,7 +27,10 @@ const tablaMsg = document.getElementById("tablaContactos");
 const adminFeedback = document.getElementById("adminFeedback");
 const siteHeader = document.getElementById("siteHeader");
 
-if (siteHeader) siteHeader.innerHTML = Header();
+if (siteHeader) {
+    siteHeader.innerHTML = Header();
+    inicializarHeaderAuth();
+}
 
 function mostrarError(mensaje) {
     if (adminFeedback) {
@@ -64,8 +70,32 @@ document.getElementById("btnConfirmarEliminar")?.addEventListener("click", async
    INICIALIZACIÓN
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-    configurarPestanas();
-    cargarTodo();
+    let adminInitialized = false;
+    onAuthStateChanged(auth, async user => {
+        if (!user) {
+            window.location.href = "../login.html";
+            return;
+        }
+
+        try {
+            const perfil = await obtenerPerfilUsuario(user.uid);
+            if (auth.currentUser?.uid !== user.uid) return;
+            if (perfil?.rol !== "admin") {
+                window.location.href = "../login.html";
+                return;
+            }
+
+            if (adminInitialized) return;
+            adminInitialized = true;
+            document.getElementById("adminContent")?.removeAttribute("hidden");
+            configurarPestanas();
+            cargarTodo();
+        } catch (error) {
+            console.error("No se pudo verificar el acceso administrativo:", error);
+            document.getElementById("adminFeedbackContainer")?.removeAttribute("hidden");
+            mostrarError("No se pudo verificar tu acceso. Inténtalo nuevamente.");
+        }
+    });
 });
 
 async function cargarTodo() {

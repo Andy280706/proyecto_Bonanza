@@ -16,7 +16,6 @@ function saveCart(cart) {
 
 export const cartService = {
     getCart: readCart,
-    saveCart,
 
     addItem(product) {
         if (!product?.id) return;
@@ -37,10 +36,6 @@ export const cartService = {
         }
 
         saveCart(cart);
-    },
-
-    addToCart(product) {
-        this.addItem(product);
     },
 
     removeItem(index) {

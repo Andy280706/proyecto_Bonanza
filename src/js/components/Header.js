@@ -1,7 +1,23 @@
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { auth } from "../firebase/config.js";
+import { obtenerPerfilUsuario } from "../services/authService.js";
+
 export function Header() {
-    const enPages = window.location.pathname.includes("/src/pages/");
-    const base = enPages ? "../../" : "./";
-    const pagesBase = enPages ? "./" : "./src/pages/";
+    const path = window.location.pathname;
+    const enAdminPage = path.includes("/src/pages/admin/");
+    const enPages = path.includes("/src/pages/") && !enAdminPage;
+    const base = enAdminPage ? "../../../" : enPages ? "../../" : "./";
+    const pagesBase = enAdminPage ? "../" : enPages ? "./" : "./src/pages/";
+    const adminHref = enAdminPage
+        ? "./index.html"
+        : enPages
+            ? "./admin/index.html"
+            : "./src/pages/admin/index.html";
+    const misPedidosHref = enAdminPage
+        ? "../pedidos.html"
+        : enPages
+            ? "./pedidos.html"
+            : "./src/pages/pedidos.html";
 
     return `
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm py-2">
@@ -24,9 +40,58 @@ export function Header() {
                                 <span class="badge rounded-pill text-bg-dark" data-cart-count>0</span>
                             </a>
                         </li>
+                        <li class="nav-item" id="pedidosNavItem" hidden>
+                            <a class="nav-link fw-bold" href="${misPedidosHref}">Mis Pedidos</a>
+                        </li>
+                        <li class="nav-item" id="adminNavItem" hidden>
+                            <a class="nav-link fw-bold" href="${adminHref}">Administración</a>
+                        </li>
+                        <li class="nav-item" id="loginNavItem">
+                            <a class="nav-link fw-bold" href="${pagesBase}login.html">Iniciar Sesión</a>
+                        </li>
+                        <li class="nav-item" id="logoutNavItem" hidden>
+                            <button class="nav-link fw-bold border-0 bg-transparent p-0" type="button" id="logoutButton">
+                                Cerrar sesión
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     `;
+}
+
+export function inicializarHeaderAuth() {
+    const pedidosNavItem = document.getElementById("pedidosNavItem");
+    const adminNavItem = document.getElementById("adminNavItem");
+    const loginNavItem = document.getElementById("loginNavItem");
+    const logoutNavItem = document.getElementById("logoutNavItem");
+    const logoutButton = document.getElementById("logoutButton");
+
+    if (!pedidosNavItem || !adminNavItem || !loginNavItem || !logoutNavItem || !logoutButton) return;
+
+    onAuthStateChanged(auth, async user => {
+        pedidosNavItem.hidden = !user;
+        loginNavItem.hidden = Boolean(user);
+        logoutNavItem.hidden = !user;
+        adminNavItem.hidden = true;
+
+        if (!user) return;
+
+        try {
+            const perfil = await obtenerPerfilUsuario(user.uid);
+            if (auth.currentUser?.uid !== user.uid) return;
+            adminNavItem.hidden = perfil?.rol !== "admin";
+        } catch (error) {
+            console.error("No se pudo consultar el rol del usuario:", error);
+        }
+    });
+
+    logoutButton.addEventListener("click", async () => {
+        try {
+            await signOut(auth);
+        } catch (error) {
+            console.error("No se pudo cerrar la sesión:", error);
+        }
+    });
 }

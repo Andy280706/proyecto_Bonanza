@@ -1,4 +1,4 @@
-import { Header } from "./components/Header.js";
+import { Header, inicializarHeaderAuth } from "./components/Header.js";
 import { Footer } from "./components/Footer.js";
 import { HomeView } from "./views/HomeView.js";
 import { ProductsView } from "./views/ProductsView.js";
@@ -27,6 +27,7 @@ async function renderApp() {
         </main>
         ${Footer()}
     `;
+    inicializarHeaderAuth();
     actualizarContadorCarrito();
 
     try {
