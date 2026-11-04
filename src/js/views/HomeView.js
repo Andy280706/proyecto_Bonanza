@@ -1,13 +1,11 @@
-import { obtenerProductos } from "../services/productService.js";
+import { obtenerProductosDestacados } from "../services/productService.js";
 import { crearContacto } from "../services/contactService.js";
 import { ProductGrid } from "../components/ProductGrid.js";
 import { cartService } from "../services/cartService.js";
 import { mostrarToast } from "../utils/mostrarToast.js";
 
 export async function HomeView() {
-    const productos = await obtenerProductos();
-    // Mostramos solo los primeros 4 productos como destacados
-    const destacados = productos.slice(0, 4);
+    const destacados = await obtenerProductosDestacados(4);
 
     const html = `
         <!-- Banner Principal -->

@@ -42,18 +42,51 @@ The content is organized as follows:
 <directory_structure>
 public/
   img/
+    helado-cono-chocolate.jpg
+    helado-cono-fresa.jpg
+    helado-cono-lucuma.jpg
+    helado-cono-vainilla.jpg
     helado-cono.jpg
+    helado-paleta-fresa.jpg
+    helado-paleta-lucuma.jpg
+    helado-paleta-maracuya.jpg
     helado-rutina.jpg
+    helado-triple-sabor.jpg
+    helado-vaso-arandano.jpg
+    helado-vaso-choco-gomitas.jpg
+    helado-vaso-choco-oreo.jpg
+    helado-vaso-fresa.jpg
+    helado-vaso-menta.jpg
+    helado-vaso-vainilla-chocolate.jpg
+    helado-vaso-vainilla-con-fresa.jpg
+    helados-vaso-vainilla-fresa.jpg
     logo.png
     manjar-blanco.jpg
+    mantequilla-clarificada-250.jpg
+    mantequilla-clarificada-500.jpg
+    mantequilla-con-sal-200.jpg
+    mantequilla-con-sal-400.jpg
+    mantequilla-sal-200.jpg
+    mantequilla-sal-400.jpg
     matequilla.jpg
     queso-andino.jpg
     queso-fresco.jpg
     queso-mozzarella.jpg
     queso-prensado.jpg
+    yogur-bebible-durazno-250ml.jpg
+    yogur-bebible-fresa-250ml.jpg
     yogur-de-1-litro.jpg
+    yogur-frutado-aguaymanto-500.jpg
+    yogur-frutado-durazno-1l.jpg
+    yogur-frutado-fresa-1l.jpg
+    yogur-frutado-guanabana-1l.jpg
+    yogur-frutado-lucuma-1l.jpg
+    yogur-frutado-sauco-500.jpg
+    yogur-griego-1kg.jpg
     yogur-griego-1l.jpg
+    yogur-griego-miel-nueces-250.jpg
     yogur-griego.jpg
+    yogur-probiotico-sin-azucar-1l.jpg
   favicon.svg
   icons.svg
 src/
@@ -960,7 +993,9 @@ dist-ssr
 <file path="src/js/firebase/config.js">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+  enableIndexedDbPersistence, getFirestore
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDd92abtSNQK0EnL76Dux0sn1bq7fR_g70",
@@ -974,6 +1009,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+enableIndexedDbPersistence(db).catch((error) => {
+  console.warn("No se pudo habilitar la persistencia offline de Firestore:", error);
+});
 </file>
 
 <file path="src/js/services/cartService.js">
@@ -1092,13 +1131,68 @@ export const deleteItem = (col, id) => ejecutarConsultaFirebase(`eliminar un ele
 </file>
 
 <file path="src/js/services/productService.js">
+import { db } from "../firebase/config.js";
 import { getItems, getItemById, createItem, deleteItem } from "./crudService.js";
 import { COLECCIONES } from "../utils/constants.js";
+import {
+    collection, getDocs, limit, query, where
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-export const obtenerProductos = () => getItems(COLECCIONES.PRODUCTOS);
+const PRODUCTOS_CACHE_KEY = "bonanza_productos_cache";
+
+const invalidarCacheProductos = () => sessionStorage.removeItem(PRODUCTOS_CACHE_KEY);
+
+export const obtenerProductos = async () => {
+    const productosCache = sessionStorage.getItem(PRODUCTOS_CACHE_KEY);
+    if (productosCache) {
+        try {
+            const productos = JSON.parse(productosCache);
+            if (Array.isArray(productos)) return productos;
+        } catch {
+            invalidarCacheProductos();
+        }
+    }
+
+    const productos = await getItems(COLECCIONES.PRODUCTOS);
+    sessionStorage.setItem(PRODUCTOS_CACHE_KEY, JSON.stringify(productos));
+    return productos;
+};
+
+export const obtenerProductosDestacados = async (limite = 4) => {
+    try {
+        const consulta = query(collection(db, "productos"), limit(limite));
+        const snap = await getDocs(consulta);
+        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    } catch (error) {
+        console.error("Error de Firebase al consultar productos destacados:", error);
+        throw error;
+    }
+};
+
+export const obtenerProductosPorCategoria = async (categoria) => {
+    try {
+        const consulta = query(
+            collection(db, "productos"),
+            where("categoria", "==", categoria)
+        );
+        const snap = await getDocs(consulta);
+        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    } catch (error) {
+        console.error("Error de Firebase al consultar productos por categoría:", error);
+        throw error;
+    }
+};
+
 export const obtenerProductoPorId = (id) => getItemById(COLECCIONES.PRODUCTOS, id);
-export const crearProducto = (data) => createItem(COLECCIONES.PRODUCTOS, data);
-export const eliminarProducto = (id) => deleteItem(COLECCIONES.PRODUCTOS, id);
+export const crearProducto = async (data) => {
+    const id = await createItem(COLECCIONES.PRODUCTOS, data);
+    invalidarCacheProductos();
+    return id;
+};
+export const eliminarProducto = async (id) => {
+    await deleteItem(COLECCIONES.PRODUCTOS, id);
+    invalidarCacheProductos();
+};
 </file>
 
 <file path="src/pages/carrito.html">
@@ -1260,16 +1354,14 @@ export const COLECCIONES = {
 </file>
 
 <file path="src/js/views/HomeView.js">
-import { obtenerProductos } from "../services/productService.js";
+import { obtenerProductosDestacados } from "../services/productService.js";
 import { crearContacto } from "../services/contactService.js";
 import { ProductGrid } from "../components/ProductGrid.js";
 import { cartService } from "../services/cartService.js";
 import { mostrarToast } from "../utils/mostrarToast.js";
 
 export async function HomeView() {
-    const productos = await obtenerProductos();
-    // Mostramos solo los primeros 4 productos como destacados
-    const destacados = productos.slice(0, 4);
+    const destacados = await obtenerProductosDestacados(4);
 
     const html = `
         <!-- Banner Principal -->
