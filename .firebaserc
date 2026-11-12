@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "proyecto-bonanza-e0fa3"
-  }
+    "default": "proyect-bonanza"
+  },
+  "targets": {},
+  "etags": {}
 }

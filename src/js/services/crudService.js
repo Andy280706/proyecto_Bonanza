@@ -14,12 +14,12 @@ async function ejecutarConsultaFirebase(accion, consulta) {
 
 export const getItems = (col) => ejecutarConsultaFirebase(`consultar ${col}`, async () => {
     const snap = await getDocs(collection(db, col));
-    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    return snap.docs.map(d => ({ ...d.data(), id: d.id }));
 });
 
 export const getItemById = (col, id) => ejecutarConsultaFirebase(`consultar un elemento de ${col}`, async () => {
     const snap = await getDoc(doc(db, col, id));
-    return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+    return snap.exists() ? { ...snap.data(), id: snap.id } : null;
 });
 
 export const createItem = (col, data) => ejecutarConsultaFirebase(`crear un elemento en ${col}`, async () =>

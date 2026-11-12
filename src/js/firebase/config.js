@@ -5,12 +5,12 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDd92abtSNQK0EnL76Dux0sn1bq7fR_g70",
-  authDomain: "proyecto-bonanza-e0fa3.firebaseapp.com",
-  projectId: "proyecto-bonanza-e0fa3",
-  storageBucket: "proyecto-bonanza-e0fa3.firebasestorage.app",
-  messagingSenderId: "1064243018142",
-  appId: "1:1064243018142:web:4ee1f7ef6bcab7be55fe8f"
+  apiKey: "AIzaSyCF7bdyPVTAE2iQ9KYc0CDdUs0g4ju2xaU",
+  authDomain: "proyect-bonanza.firebaseapp.com",
+  projectId: "proyect-bonanza",
+  storageBucket: "proyect-bonanza.firebasestorage.app",
+  messagingSenderId: "609672770932",
+  appId: "1:609672770932:web:3049b171e415b7d613a821"
 };
 
 const app = initializeApp(firebaseConfig);
