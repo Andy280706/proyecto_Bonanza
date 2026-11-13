@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /src/pages/admin/
+Disallow: /src/pages/carrito.html
+Disallow: /src/pages/pedidos.html
+Disallow: /src/pages/login.html
+Disallow: /src/pages/registro.html
+
+Sitemap: https://proyect-bonanza.web.app/sitemap.xml
