@@ -1,15 +1,10 @@
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {
-    collection,
-    getDocs,
-    query,
-    where
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { Header, inicializarHeaderAuth } from "./components/Header.js";
 import { Footer } from "./components/Footer.js";
-import { auth, db } from "./firebase/config.js";
+import { auth } from "./firebase/config.js";
 import { escapeHTML } from "./utils/escapeHTML.js";
 import { formatCurrency } from "./utils/formatCurrency.js";
+import { obtenerPedidosPorUsuario } from "./services/orderService.js";
 
 const app = document.getElementById("app");
 
@@ -82,16 +77,12 @@ if (app) {
         }
 
         try {
-            const pedidosQuery = query(
-                collection(db, "pedidos"),
-                where("usuarioId", "==", user.uid)
-            );
-            const snapshot = await getDocs(pedidosQuery);
+            const pedidos = await obtenerPedidosPorUsuario(user.uid);
             if (auth.currentUser?.uid !== user.uid) return;
 
-            const pedidos = snapshot.docs
-                .map(documento => ({ id: documento.id, ...documento.data() }))
-                .sort((a, b) => obtenerFecha(b.creadoEn).getTime() - obtenerFecha(a.creadoEn).getTime());
+            pedidos.sort((a, b) =>
+                obtenerFecha(b.creadoEn).getTime() - obtenerFecha(a.creadoEn).getTime()
+            );
 
             if (pedidos.length === 0) {
                 mostrarMensaje(pedidosContenido, "Aún no cuentas con compras registradas.");

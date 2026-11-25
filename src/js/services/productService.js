@@ -15,11 +15,11 @@ const normalizarProducto = (producto, id = producto?.id) => {
     return {
         ...data,
         id: id ?? data.id ?? "",
-        nombre: data.nombre ?? data.name ?? data.title ?? "",
-        precio: data.precio ?? data.price ?? 0,
-        categoria: data.categoria ?? data.category ?? "",
-        imagen: data.imagen ?? data.imagenUrl ?? data.imageUrl ?? data.image ?? "",
-        descripcion: data.descripcion ?? data.description ?? ""
+        nombre: data.nombre ?? "",
+        precio: data.precio ?? 0,
+        categoria: data.categoria ?? "",
+        imagen: data.imagen ?? "",
+        descripcion: data.descripcion ?? ""
     };
 };
 
@@ -29,9 +29,7 @@ export const obtenerProductos = async () => {
         try {
             const productos = JSON.parse(productosCache);
             if (Array.isArray(productos)) {
-                const normalizados = productos.map(producto => normalizarProducto(producto));
-                sessionStorage.setItem(PRODUCTOS_CACHE_KEY, JSON.stringify(normalizados));
-                return normalizados;
+                return productos;
             }
         } catch {
             invalidarCacheProductos();

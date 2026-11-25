@@ -28,8 +28,12 @@ service cloud.firestore {
     }
 
     match /pedidos/{orderId} {
-      allow create: if isAdmin()
-        || (signedIn() && request.resource.data.usuarioId == request.auth.uid);
+      allow create: if request.resource.data.total is number
+        && request.resource.data.total > 0
+        && request.resource.data.productos is list
+        && request.resource.data.productos.size() > 0
+        && (isAdmin()
+          || (signedIn() && request.resource.data.usuarioId == request.auth.uid));
       allow read: if isAdmin()
         || (signedIn() && resource.data.usuarioId == request.auth.uid);
       allow update, delete: if isAdmin();
@@ -41,7 +45,16 @@ service cloud.firestore {
     }
 
     match /contactos/{contactId} {
-      allow create: if true;
+      allow create: if request.resource.data.keys().hasAll(["nombre", "correo", "mensaje"])
+        && request.resource.data.nombre is string
+        && request.resource.data.nombre.size() > 0
+        && request.resource.data.nombre.size() <= 1000
+        && request.resource.data.correo is string
+        && request.resource.data.correo.size() > 0
+        && request.resource.data.correo.size() <= 1000
+        && request.resource.data.mensaje is string
+        && request.resource.data.mensaje.size() > 0
+        && request.resource.data.mensaje.size() <= 1000;
       allow read, update, delete: if isAdmin();
     }
   }

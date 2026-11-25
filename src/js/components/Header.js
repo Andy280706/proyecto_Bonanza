@@ -20,7 +20,7 @@ export function Header() {
             : "./src/pages/pedidos.html";
 
     return `
-        <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm py-2">
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm py-2">
             <div class="container d-flex align-items-center justify-content-between">
                 <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="${base}index.html">
                     <img src="${base}img/logo.png" alt="" width="40" height="40" class="me-2">
@@ -50,7 +50,7 @@ export function Header() {
                             <a class="nav-link fw-bold" href="${pagesBase}login.html">Iniciar Sesión</a>
                         </li>
                         <li class="nav-item" id="logoutNavItem" hidden>
-                            <button class="nav-link fw-bold border-0 bg-transparent p-0" type="button" id="logoutButton">
+                            <button class="nav-link fw-bold border-0 bg-transparent" type="button" id="logoutButton">
                                 Cerrar sesión
                             </button>
                         </li>

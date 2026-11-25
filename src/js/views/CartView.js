@@ -171,7 +171,7 @@ export class CartView {
         }
 
         this.contenedor.innerHTML = cart.map((item, index) => {
-            const imagenSrc = escapeHTML(item.imagen || item.imagenUrl || item.image || '');
+            const imagenSrc = escapeHTML(item.imagen || '');
             const imagenHTML = imagenSrc 
                 ? `<img src="${imagenSrc}" alt="${escapeHTML(item.nombre)}" class="img-fluid rounded" style="max-height: 100%; max-width: 100%; object-fit: contain;" onerror="this.onerror=null;this.src='/img/logo.png';">`
                 : `<i class="bi bi-box-seam text-secondary fs-3"></i>`;
