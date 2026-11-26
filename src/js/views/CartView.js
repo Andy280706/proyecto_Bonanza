@@ -153,9 +153,24 @@ export class CartView {
 
     render() {
         const cart = cartService.getCart();
-        const { totalDinero, totalItems } = cartService.getTotals();
+        const cantidadesValidas = cart.every(item =>
+            Number.isSafeInteger(item.cantidad) && item.cantidad > 0
+        );
+        const { totalDinero, totalItems } = cantidadesValidas
+            ? cartService.getTotals()
+            : { totalDinero: 0, totalItems: 0 };
 
         if (!this.contenedor) return;
+
+        if (this.checkoutFeedback) {
+            this.checkoutFeedback.querySelector(".cart-cantidad-warning")?.remove();
+            if (!cantidadesValidas) {
+                const warning = document.createElement("div");
+                warning.className = "alert alert-warning cart-cantidad-warning";
+                warning.textContent = "El carrito contiene cantidades inválidas. Elimina los productos afectados antes de continuar.";
+                this.checkoutFeedback.append(warning);
+            }
+        }
 
         if (cart.length === 0) {
             this.contenedor.innerHTML = `
@@ -177,6 +192,8 @@ export class CartView {
                 : `<i class="bi bi-box-seam text-secondary fs-3"></i>`;
 
             const precioFormateado = formatCurrency(item.precio);
+            const cantidadValida = Number.isSafeInteger(item.cantidad) && item.cantidad > 0;
+            const cantidadHTML = escapeHTML(cantidadValida ? item.cantidad : "");
 
             return `
                 <div class="row align-items-center mb-4 border-bottom pb-4">
@@ -203,9 +220,9 @@ export class CartView {
                     <div class="col-md-3 col-6 text-end text-md-center">
                         <span class="text-muted small d-block d-md-none">Cantidad:</span>
                         <div class="input-group input-group-sm justify-content-md-center justify-content-end" style="max-width: 120px; margin-left: auto; margin-right: auto;">
-                            <button class="btn btn-outline-secondary btn-cambiar-cant" data-index="${index}" data-cambio="-1">-</button>
-                            <input type="text" class="form-control text-center bg-white" value="${item.cantidad}" readonly style="max-width: 40px;">
-                            <button class="btn btn-outline-secondary btn-cambiar-cant" data-index="${index}" data-cambio="1">+</button>
+                            <button class="btn btn-outline-secondary btn-cambiar-cant" data-index="${index}" data-cambio="-1" ${cantidadValida ? "" : "disabled"}>-</button>
+                            <input type="text" class="form-control text-center bg-white" value="${cantidadHTML}" readonly style="max-width: 40px;">
+                            <button class="btn btn-outline-secondary btn-cambiar-cant" data-index="${index}" data-cambio="1" ${cantidadValida ? "" : "disabled"}>+</button>
                         </div>
                     </div>
                 </div>
@@ -216,7 +233,7 @@ export class CartView {
         const totalFormateado = formatCurrency(totalDinero);
         if (this.subtotalLabel) this.subtotalLabel.innerText = totalFormateado;
         if (this.totalLabel) this.totalLabel.innerText = totalFormateado;
-        if (this.checkoutButton) this.checkoutButton.disabled = false;
+        if (this.checkoutButton) this.checkoutButton.disabled = !cantidadesValidas;
     }
 
     bindEvents() {
@@ -250,6 +267,14 @@ export class CartView {
                 e.preventDefault();
                 const cart = cartService.getCart();
                 if (cart.length === 0) return;
+                if (!cart.every(item =>
+                    Number.isSafeInteger(item.cantidad) && item.cantidad > 0
+                )) {
+                    if (this.checkoutFeedback) {
+                        this.checkoutFeedback.textContent = "El carrito contiene cantidades inválidas. Elimina los productos afectados antes de continuar.";
+                    }
+                    return;
+                }
                 await this.authReady;
                 const user = auth.currentUser;
                 if (!user) {
